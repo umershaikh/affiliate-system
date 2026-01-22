@@ -1,0 +1,98 @@
+/* Container and Section Spacing */
+.home-hero-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.home-hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.home-hero-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+/* Image Side (5/12 width) */
+.home-hero-thumb {
+    flex: 0 0 41.666%;
+    max-width: 41.666%;
+}
+
+.home-hero-thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+
+/* Content Side (7/12 width) */
+.home-hero-content {
+    flex: 0 0 55%;
+    max-width: 55%;
+}
+
+.section-header .sub-title {
+    color: #ff5e14;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.section-header .section-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #000033;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+/* The Rocket Divider */
+.title-divider {
+    position: relative;
+    height: 1px;
+    background: #e5e5e5;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.title-divider::after {
+content: '';
+    position: absolute;
+    bottom: -36px;
+    right: -69px;
+    transform: translateY(-50%);
+    width: 70px;
+    height: 70px;
+    background: url(https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png) no-repeat center;
+    background-size: contain;
+}
+
+/* Paragraph Text */
+.description {
+    color: #666666;
+    line-height: 1.8;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+    .home-hero-thumb, .home-hero-content {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .home-hero-row {
+        flex-direction: column;
+    }
+    .section-header .section-title {
+        font-size: 32px;
+    }
+}
