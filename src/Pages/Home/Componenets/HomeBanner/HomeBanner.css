@@ -34,7 +34,7 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 15px;
+  /* padding: 0 15px; */
   width: 100%;
   position: relative;
   z-index: 10;
@@ -43,7 +43,8 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 -15px;
+  justify-content: center;
+  gap: 15px;
 }
 
 .justify-content-center {
@@ -199,7 +200,7 @@
 
 @media (max-width: 768px) {
   .banner-section {
-    padding: 60px 0;
+    padding: 60px 10px;
     min-height: 500px;
   }
 
@@ -229,7 +230,7 @@
 
 @media (max-width: 480px) {
   .banner-section {
-    padding: 40px 0;
+    padding: 100px 10px;
     min-height: 450px;
   }
 
@@ -242,7 +243,7 @@
   }
 
   .btn-base {
-    padding: 12px 24px;
+    padding: 12px 0px;
     font-size: 14px;
   }
 

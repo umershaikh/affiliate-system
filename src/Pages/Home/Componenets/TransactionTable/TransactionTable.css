@@ -1,18 +1,21 @@
+/* Base Styles */
 .rtx-transaction-section {
-    padding: 80px 0;
+    padding: 60px 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #fff;
+    overflow-x: hidden; /* Prevent horizontal scroll on the whole page */
 }
 
 .rtx-container {
     max-width: 1140px;
     margin: 0 auto;
     padding: 0 15px;
+    box-sizing: border-box;
 }
 
 .rtx-section-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .rtx-sub-title {
@@ -25,12 +28,10 @@
 }
 
 .rtx-main-title {
-    font-size: 36px;
+    font-size: clamp(24px, 5vw, 36px); /* Fluid typography */
     color: #333;
     margin: 0;
-    border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
-    display: inline-block;
     width: 100%;
 }
 
@@ -40,18 +41,16 @@
     justify-content: center;
     gap: 10px;
     margin-bottom: 30px;
-    margin-top: 30px;
 }
 
 .rtx-tab-btn {
-    padding: 10px 25px;
+    padding: 12px 20px;
     border: 1px solid #ddd;
     background: #fff;
     cursor: pointer;
     font-weight: 600;
     font-size: 13px;
     transition: all 0.3s ease;
-    text-transform: uppercase;
 }
 
 .rtx-tab-btn.rtx-active {
@@ -60,9 +59,9 @@
     border-color: #B036F1;
 }
 
-/* Table Styling */
+/* Table Wrapper */
 .rtx-table-wrapper {
-    overflow-x: auto;
+    width: 100%;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0,0,0,0.05);
 }
@@ -71,77 +70,96 @@
     width: 100%;
     border-collapse: collapse;
     background: white;
+    table-layout: auto;
 }
 
 .rtx-table thead tr {
-    background-color: #312547; /* Matching the dark purple in image */
+    background-color: #312547;
     color: #ffffff;
-    text-align: left;
 }
 
 .rtx-table th, .rtx-table td {
-    padding: 15px 25px;
+    padding: 15px;
     border: 1px solid #f1f1f1;
+    text-align: left;
 }
 
-.rtx-table th {
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-.rtx-table tbody tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-/* Author/Avatar Styling */
 .rtx-author {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
 .rtx-avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    object-fit: cover;
-    background: #eee;
+    flex-shrink: 0; /* Prevents avatar from squishing */
 }
 
-.rtx-name {
-    color: #555;
-    font-weight: 500;
-}
-
-.rtx-amount {
-    font-weight: 600;
-    color: #333;
-}
-
-/* Responsive Table for Mobile */
+/* --- Mobile Responsive Fix --- */
 @media (max-width: 768px) {
     .rtx-table thead {
         display: none;
     }
+
     .rtx-table, .rtx-table tbody, .rtx-table tr, .rtx-table td {
         display: block;
         width: 100%;
+        box-sizing: border-box;
     }
+
     .rtx-table tr {
         margin-bottom: 15px;
-        border: 1px solid #ddd;
+        border: 1px solid #eee;
+        border-radius: 8px;
     }
+
     .rtx-table td {
         text-align: right;
-        padding-left: 50%;
+        padding: 12px 15px;
+        padding-left: 45%; /* Space for the label */
         position: relative;
+        border: none;
+        border-bottom: 1px solid #f5f5f5;
+        min-height: 45px;
+        word-break: break-word; /* Fixes text overflow */
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
+
     .rtx-table td::before {
         content: attr(data-label);
         position: absolute;
         left: 15px;
-        width: 45%;
+        width: 40%;
         text-align: left;
         font-weight: bold;
+        font-size: 12px;
+        color: #B036F1;
+        text-transform: uppercase;
+    }
+
+    .rtx-author {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .rtx-name {
+        font-size: 14px;
+        max-width: 150px; /* Limits name width to prevent push */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+@media (max-width: 480px) {
+    .rtx-tab-menu {
+        flex-direction: column;
+    }
+    
+    .rtx-table td {
+        padding-left: 40%;
     }
 }

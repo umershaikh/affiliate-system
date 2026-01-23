@@ -8,7 +8,7 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    /* padding: 0 15px; */
 }
 
 .vslColCenter {
@@ -86,7 +86,6 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .vslBrandWrapper {
-        justify-content: flex-start; /* Allows scrolling on mobile */
-        padding-left: 15px;
+        justify-content: space-evenly; /* Allows scrolling on mobile */
     }
 }

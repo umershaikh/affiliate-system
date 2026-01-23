@@ -59,14 +59,14 @@ const TransactionTable = () => {
             <tbody>
               {currentData.map((item, index) => (
                 <tr key={index}>
-                  <td>
+                  <td data-label="Name">
                     <div className="rtx-author">
                       <img src={item.img} alt="user" className="rtx-avatar" />
                       <span className="rtx-name">{item.name}</span>
                     </div>
                   </td>
-                  <td>{item.date}</td>
-                  <td className="rtx-amount">{item.amount}</td>
+                  <td data-label="Date">{item.date}</td>
+                  <td data-label="Amount" className="rtx-amount">{item.amount}</td>
                 </tr>
               ))}
             </tbody>
