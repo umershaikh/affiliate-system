@@ -1,0 +1,147 @@
+.rtx-transaction-section {
+    padding: 80px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+}
+
+.rtx-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.rtx-section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.rtx-sub-title {
+    color: #ff6b4a;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.rtx-main-title {
+    font-size: 36px;
+    color: #333;
+    margin: 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Tabs Styling */
+.rtx-tab-menu {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.rtx-tab-btn {
+    padding: 10px 25px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.rtx-tab-btn.rtx-active {
+    background-color: #ff6b4a;
+    color: white;
+    border-color: #ff6b4a;
+}
+
+/* Table Styling */
+.rtx-table-wrapper {
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.rtx-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.rtx-table thead tr {
+    background-color: #312547; /* Matching the dark purple in image */
+    color: #ffffff;
+    text-align: left;
+}
+
+.rtx-table th, .rtx-table td {
+    padding: 15px 25px;
+    border: 1px solid #f1f1f1;
+}
+
+.rtx-table th {
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.rtx-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Author/Avatar Styling */
+.rtx-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.rtx-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #eee;
+}
+
+.rtx-name {
+    color: #555;
+    font-weight: 500;
+}
+
+.rtx-amount {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Responsive Table for Mobile */
+@media (max-width: 768px) {
+    .rtx-table thead {
+        display: none;
+    }
+    .rtx-table, .rtx-table tbody, .rtx-table tr, .rtx-table td {
+        display: block;
+        width: 100%;
+    }
+    .rtx-table tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+    }
+    .rtx-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    .rtx-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,112 @@
+/* Section Base */
+.hs-section {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.hs-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header Styling */
+.hs-header {
+    text-align: center;
+    margin-bottom: 60px;
+    border-bottom: 0.5px solid rgba(0,0,0,0.1); /* Preserved from original */
+    position: relative; /* Necessary for the absolute border icon */
+}
+
+.hs-sub-title {
+    color: #ff6a42;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.hs-main-title {
+    font-size: 40px;
+    font-weight: 800;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.hs-title-border {
+    height: 70px;
+    width: 70px;
+    top: 40px; /* Original exact value */
+    right: -65px; /* Original exact value */
+    position: absolute;
+    background-image: url(https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Grid System */
+.hs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* Card Styling */
+.hs-item {
+    background: #fff;
+    padding: 35px 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-bottom: 4px solid #3e206d; /* Signature purple border preserved */
+    transition: all 0.3s ease;
+}
+
+.hs-item:hover {
+    transform: translateY(-5px);
+}
+
+.hs-body {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Icon & Content */
+.hs-icon {
+    font-size: 45px;
+    color: #ff6a42;
+    line-height: 1;
+}
+
+.hs-item-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.hs-item-desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+
+
+@media screen and (max-width: 1350px) {
+    .hs-title-border{
+        display: none;
+    }
+}
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .hs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .hs-grid { grid-template-columns: 1fr; }
+    .hs-main-title { font-size: 30px; }
+}

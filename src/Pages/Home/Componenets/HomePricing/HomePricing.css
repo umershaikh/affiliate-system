@@ -1,0 +1,170 @@
+.hp-main-pricing-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hp-content-container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.hp-section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hp-badge-text {
+    color: #ff6f3f;
+    font-weight: 700;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.hp-primary-heading {
+    color: #333;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.hp-divider-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.hp-line-left, .hp-line-right {
+    height: 1px;
+    width: 50px;
+    background-color: #ddd;
+}
+
+.hp-rocket-icon {
+    width: 40px;
+}
+
+.hp-plans-layout-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.hp-individual-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.hp-card-header-purple {
+    background-color: #362a4e;
+    color: white;
+    padding: 40px 20px 0px 20px; /* Reduced bottom padding */
+    text-align: center;
+    position: relative;
+}
+
+.hp-plan-tier-name {
+    margin: 0 0 15px 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.hp-price-display {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 30px;
+}
+
+.hp-currency-symbol {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.hp-price-integer {
+    font-size: 44px;
+    font-weight: 700;
+}
+
+/* THE FIX: SVG Container and Path */
+.hp-v-shape-container {
+    position: absolute;
+    bottom: -44px; /* Move it down so it hangs over the white body */
+    left: 0;
+    width: 100%;
+    height: 45px;
+    z-index: 10;
+}
+
+.hp-v-shape-container svg {
+    width: 100%;
+    height: 100%;
+    fill: #362a4e; /* Same as header background */
+}
+
+.hp-card-body-content {
+    padding: 45px 25px 30px 25px; /* Top padding increased to clear the triangle */
+    background: #fff;
+}
+
+.hp-feature-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hp-list-item-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.hp-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.hp-value {
+    color: #333;
+    font-weight: 600;
+}
+
+.hp-help-trigger {
+    color: #ff7c52;
+    cursor: help;
+}
+
+.hp-cta-subscribe-button {
+    width: 100%;
+    background-color: #ff7c52;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.hp-footer-action-area {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.hp-view-all-plans-btn {
+    background-color: #ff7c52;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}

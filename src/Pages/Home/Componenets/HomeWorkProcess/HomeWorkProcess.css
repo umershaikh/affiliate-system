@@ -1,0 +1,145 @@
+/* Container & Wrapper */
+.hwp-main-wrapper {
+    padding: 100px 20px;
+    background-color: #ffffff;
+}
+
+.hwp-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Header Styles */
+.hwp-header-block {
+    margin-bottom: 70px;
+}
+
+.hwp-upper-label {
+    display: block;
+    color: #FF764C;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.hwp-main-heading {
+    font-size: 42px;
+    color: #2D3436;
+    margin: 0;
+    font-weight: 800;
+}
+
+.hwp-divider-area {
+    position: relative;
+    max-width: 80%;
+    margin: 15px auto 0;
+}
+
+.hwp-horizontal-line {
+    height: 1.5px;
+    background: #EAEAEA;
+    width: 100%;
+}
+
+.hwp-rocket-img {
+    position: absolute;
+    right: -77px;
+    top: -60px;
+    height: 70px;
+    width: 70px;
+    transform: rotate(15deg);
+}
+
+/* Steps Grid */
+.hwp-steps-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.hwp-card-item {
+    flex: 1;
+    min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hwp-visual-container {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+/* The Numbered Circle */
+.hwp-circle-base {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+/* Decorative Outer Rings */
+.hwp-circle-base::after {
+    content: '';
+    position: absolute;
+    width: 115px;
+    height: 115px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+/* Specific Colors & Glows */
+.hwp-step-teal { background-color: #16D5CA; color: #16D5CA; }
+.hwp-step-teal::before { content: ''; position: absolute; width: 105px; height: 105px; border: 8px solid rgba(22, 213, 202, 0.15); border-radius: 50%; }
+
+.hwp-step-navy { background-color: #372B4D; color: #372B4D; }
+.hwp-step-navy::before { content: ''; position: absolute; width: 105px; height: 105px; border: 8px solid rgba(55, 43, 77, 0.15); border-radius: 50%; }
+
+.hwp-step-purple { background-color: #B036F1; color: #B036F1; }
+.hwp-step-purple::before { content: ''; position: absolute; width: 105px; height: 105px; border: 8px solid rgba(176, 54, 241, 0.15); border-radius: 50%; }
+
+.hwp-step-orange { background-color: #FF764C; color: #FF764C; }
+.hwp-step-orange::before { content: ''; position: absolute; width: 105px; height: 105px; border: 8px solid rgba(255, 118, 76, 0.15); border-radius: 50%; }
+
+/* The Number itself (Ensuring it stays white despite parent currentColor) */
+.hwp-circle-base { color: white !important; }
+
+/* Arrows */
+.hwp-svg-arrow {
+    position: absolute;
+    right: -75px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 80px;
+    z-index: 1;
+}
+
+/* Text Label */
+.hwp-step-label {
+    font-size: 19px;
+    color: #333;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Responsive Fixes */
+@media (max-width: 1024px) {
+    .hwp-svg-arrow { display: none; }
+    .hwp-steps-flex { gap: 50px; }
+}

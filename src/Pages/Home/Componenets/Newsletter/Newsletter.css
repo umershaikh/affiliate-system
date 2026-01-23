@@ -1,0 +1,95 @@
+/* Background and Section Spacing */
+.nl-cta-wrapper {
+  background: linear-gradient(rgba(46, 32, 79, 0.8), rgba(46, 32, 79, 0.8)),
+              url('https://script.viserlab.com/revptc/assets/images/frontend/subscribe/6381f30b8c2471669460747.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nl-container {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Typography */
+.nl-title {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+}
+
+/* Form Layout */
+.nl-form-box {
+  display: flex;
+  justify-content: center;
+}
+
+.nl-input-group {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  max-width: 650px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Input Styling */
+.nl-email-input {
+  flex: 1;
+  min-width: 280px;
+  padding: 14px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+}
+
+.nl-email-input::placeholder {
+  color: #999;
+}
+
+/* Button Styling */
+.nl-submit-button {
+  background-color: #ff7c52; /* Matches the vibrant orange in the image */
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.nl-submit-button:hover {
+  background-color: #ff6a38;
+}
+
+.nl-submit-button:active {
+  transform: scale(0.98);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .nl-input-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .nl-email-input, .nl-submit-button {
+    width: 100%;
+  }
+  
+  .nl-title {
+    font-size: 1.8rem;
+  }
+}

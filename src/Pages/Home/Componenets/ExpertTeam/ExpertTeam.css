@@ -1,0 +1,132 @@
+/* Container and Section Spacing */
+.exp-t-section {
+  padding: 80px 0;
+  background-color: #ffffff;
+}
+
+/* Section Header Styles */
+.exp-t-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.exp-t-upper-title {
+  display: block;
+  color: #f15a24; /* Branding Orange */
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.exp-t-main-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.exp-t-divider {
+  width: 60px;
+  height: 12px;
+  margin: 15px auto 0;
+  background-image: url("https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Card UI */
+.exp-t-card {
+  position: relative;
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.exp-t-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.exp-t-image {
+  width: 100%;
+  display: block;
+  transition: filter 0.3s ease;
+}
+
+/* The Subtle Shadow and Border Look */
+.exp-t-details {
+  padding: 25px 15px;
+  text-align: center;
+  background: #fff;
+}
+
+.exp-t-bottom-bar {
+  height: 3px;
+  background: #e0e0e0;
+  width: 100%;
+  border-radius: 0 0 10px 10px;
+}
+
+.exp-t-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #222;
+}
+
+.exp-t-role {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+/* Hover Content Layer */
+.exp-t-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transform: scale(1.05);
+}
+
+.exp-t-card:hover .exp-t-overlay {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+
+.exp-t-name-alt {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 4px;
+}
+
+.exp-t-role-alt {
+  font-size: 0.9rem;
+  color: #f15a24;
+  margin-bottom: 10px;
+}
+
+.exp-t-sep {
+  width: 40px;
+  border: 1px solid #eee;
+  margin: 10px 0;
+}
+
+.exp-t-bio {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #555;
+}

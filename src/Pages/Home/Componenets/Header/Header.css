@@ -1,6 +1,6 @@
 /* --- Base Styles (Desktop) --- */
 .full-header-div{
-background: #02040a;
+background: transparent;
 }
 .navbar-container {
   display: flex;

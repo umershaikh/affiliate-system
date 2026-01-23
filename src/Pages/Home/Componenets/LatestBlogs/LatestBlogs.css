@@ -1,0 +1,140 @@
+/* Container & Background */
+.unique-blog-wrapper {
+  background-color: #f8f9fa;
+  padding: 80px 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.unique-blog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header Styling */
+.unique-blog-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.unique-sub-title {
+  color: #ff6b35; /* Orange accent */
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.unique-main-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #333;
+  margin: 0;
+}
+
+.unique-title-divider {
+  width: 60px;
+  height: 40px;
+  margin: 10px auto;
+  background-image: url("https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Grid Layout */
+.unique-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Card Styling */
+.unique-blog-card {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.unique-blog-card:hover {
+  transform: translateY(-5px);
+}
+
+.unique-thumb-box {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+
+.unique-blog-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.unique-date-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ff6b35;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.unique-content-box {
+  padding: 25px;
+}
+
+.unique-card-title {
+  font-size: 18px;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+.unique-card-title a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+.unique-card-title a:hover {
+  color: #ff6b35;
+}
+
+.unique-card-text {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.unique-read-more {
+  text-decoration: none;
+  color: #ff6b35;
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.unique-arrow {
+  margin-left: 8px;
+  transition: margin-left 0.3s;
+}
+
+.unique-read-more:hover .unique-arrow {
+  margin-left: 12px;
+}
