@@ -19,11 +19,7 @@ const HomeWorkProcess = () => {
           <h2 className="hwp-main-heading">Our Work Process In 4 Steps</h2>
           <div className="hwp-divider-area">
             <div className="hwp-horizontal-line"></div>
-            <img 
-              src="https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png" 
-              className="hwp-rocket-img" 
-              alt="Process Icon" 
-            />
+
           </div>
         </div>
 

@@ -63,9 +63,9 @@
   transform: translate(-50%, -50%);
   width: 8px;
   height: 8px;
-  background-color: #ff6f3c;
+  background-color: #B036F1;
   border-radius: 50%;
-  box-shadow: 0 0 10px #ff6f3c;
+  box-shadow: 0 0 10px #B036F1;
 }
 
 /* Copyright Text */
@@ -82,7 +82,7 @@
   right: 30px;
   width: 45px;
   height: 45px;
-  background-color: #ff6f3c;
+  background-color: #B036F1;
   border: none;
   border-radius: 50%;
   color: white;
@@ -95,5 +95,5 @@
 }
 
 .custom-scroll-top:hover {
-  background-color: #e55a2b;
+  background-color: #69049f;
 }

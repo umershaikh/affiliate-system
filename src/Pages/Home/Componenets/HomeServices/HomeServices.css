@@ -20,7 +20,7 @@
 }
 
 .hs-sub-title {
-    color: #ff6a42;
+    color: #B036F1;
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 10px;
@@ -43,6 +43,7 @@
     background-image: url(https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png);
     background-repeat: no-repeat;
     background-position: center;
+    display: none;
 }
 
 /* Grid System */
@@ -75,7 +76,7 @@
 /* Icon & Content */
 .hs-icon {
     font-size: 45px;
-    color: #ff6a42;
+    color: #B036F1;
     line-height: 1;
 }
 

@@ -11,12 +11,6 @@
     padding: 0 15px;
 }
 
-.vslRow {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .vslColCenter {
     text-align: center;
     width: 100%;
@@ -24,7 +18,7 @@
 }
 
 .vslSubTitle {
-    color: #ff6131; /* The orange color from your screenshot */
+    color: #B036F1;
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -48,7 +42,24 @@
     background-size: contain;
 }
 
+/* NEW WRAPPER REPLACING SWIPER */
+.vslBrandWrapper {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-width: none;
+    justify-content: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.vslBrandWrapper::-webkit-scrollbar {
+    display: none; /* Hides scrollbar for Chrome/Safari */
+}
+
 .vslBrandItem {
+    flex: 0 0 auto; /* Prevents shrinking */
     background: #fff;
     border: 1px solid #ebebeb;
     padding: 10px;
@@ -58,19 +69,24 @@
     transition: all 0.3s ease;
     height: 125px;
     width: 125px;
+    border-radius: 8px;
 }
 
 .vslBrandItem:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
 }
 
 .vslBrandItem img {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 100px;
+    max-height: 100px;
     object-fit: contain;
-    display: block;
 }
 
-.vslColFull {
-    width: 100%;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .vslBrandWrapper {
+        justify-content: flex-start; /* Allows scrolling on mobile */
+        padding-left: 15px;
+    }
 }

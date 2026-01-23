@@ -38,7 +38,7 @@
 }
 
 .section-header .sub-title {
-    color: #ff5e14;
+    color: #B036F1;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -73,6 +73,7 @@ content: '';
     height: 70px;
     background: url(https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png) no-repeat center;
     background-size: contain;
+    display: none;
 }
 
 /* Paragraph Text */

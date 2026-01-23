@@ -18,7 +18,7 @@
 }
 
 .unique-sub-title {
-  color: #ff6b35; /* Orange accent */
+  color: #B036F1; /* Orange accent */
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -40,6 +40,7 @@
   background-image: url("https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png");
   background-repeat: no-repeat;
   background-position: center;
+  display: none;
 }
 
 /* Grid Layout */
@@ -78,7 +79,7 @@
   position: absolute;
   top: 15px;
   right: 15px;
-  background-color: #ff6b35;
+  background-color: #B036F1;
   color: white;
   padding: 8px 12px;
   border-radius: 50%;
@@ -123,7 +124,7 @@
 
 .unique-read-more {
   text-decoration: none;
-  color: #ff6b35;
+  color: #B036F1;
   font-weight: 700;
   font-size: 14px;
   display: inline-flex;

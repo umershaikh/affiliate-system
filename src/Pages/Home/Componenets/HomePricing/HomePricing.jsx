@@ -20,11 +20,7 @@ const HomePricing = () => {
           <h2 className="hp-primary-heading">Choose The Most Suitable Plan For You</h2>
           <div className="hp-divider-visual">
             <span className="hp-line-left"></span>
-            <img 
-              src="https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png" 
-              alt="Rocket Icon" 
-              className="hp-rocket-icon" 
-            />
+
             <span className="hp-line-right"></span>
           </div>
         </header>

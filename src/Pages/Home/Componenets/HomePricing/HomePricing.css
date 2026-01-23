@@ -16,7 +16,7 @@
 }
 
 .hp-badge-text {
-    color: #ff6f3f;
+    color: #B036F1;
     font-weight: 700;
     font-size: 14px;
     display: block;
@@ -138,13 +138,13 @@
 }
 
 .hp-help-trigger {
-    color: #ff7c52;
+    color: #B036F1;
     cursor: help;
 }
 
 .hp-cta-subscribe-button {
     width: 100%;
-    background-color: #ff7c52;
+    background-color:#B036F1;
     color: white;
     border: none;
     padding: 12px;
@@ -160,7 +160,7 @@
 }
 
 .hp-view-all-plans-btn {
-    background-color: #ff7c52;
+    background-color: #B036F1;
     color: white;
     border: none;
     padding: 12px 30px;

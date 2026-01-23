@@ -39,7 +39,7 @@ const VideoSection = () => {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(43, 33, 71, 0.7);
+            background: rgba(43, 33, 71, 0.2);
             z-index: 1;
           }
 
@@ -49,7 +49,7 @@ const VideoSection = () => {
           .play-btn {
             width: 85px;
             height: 85px;
-            background: #ff6b3d;
+            background: #B036F1;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -60,7 +60,7 @@ const VideoSection = () => {
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
           }
 
-          .play-btn:hover { transform: scale(1.15); background: #ff5a26; }
+          .play-btn:hover { transform: scale(1.15); background: #69049f; }
 
           .sharp-triangle {
             width: 28px;

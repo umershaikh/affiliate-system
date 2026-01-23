@@ -16,7 +16,7 @@
 }
 
 .rtx-sub-title {
-    color: #ff6b4a;
+    color: #B036F1;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 1px;
@@ -55,9 +55,9 @@
 }
 
 .rtx-tab-btn.rtx-active {
-    background-color: #ff6b4a;
+    background-color: #B036F1;
     color: white;
-    border-color: #ff6b4a;
+    border-color: #B036F1;
 }
 
 /* Table Styling */

@@ -12,7 +12,7 @@
 
 .exp-t-upper-title {
   display: block;
-  color: #f15a24; /* Branding Orange */
+  color: #B036F1; /* Branding Orange */
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 2px;
@@ -33,6 +33,7 @@
   background-image: url("https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png");
   background-repeat: no-repeat;
   background-position: center;
+  display: none;
 }
 
 /* Card UI */

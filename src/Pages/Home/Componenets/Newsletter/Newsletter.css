@@ -59,7 +59,7 @@
 
 /* Button Styling */
 .nl-submit-button {
-  background-color: #ff7c52; /* Matches the vibrant orange in the image */
+  background-color: #B036F1; /* Matches the vibrant orange in the image */
   color: white;
   border: none;
   padding: 14px 40px;
@@ -71,7 +71,7 @@
 }
 
 .nl-submit-button:hover {
-  background-color: #ff6a38;
+  background-color: #69049f;
 }
 
 .nl-submit-button:active {

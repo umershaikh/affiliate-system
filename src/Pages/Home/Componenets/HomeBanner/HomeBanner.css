@@ -111,13 +111,13 @@
 }
 
 .btn-base:first-child {
-  background-color: #ff7149;
+  background-color: #9111d6;
   color: #ffffff;
-  border-color: #ff7149;
+  border-color: #B036F1;
 }
 
 .btn-base:first-child:hover {
-  background-color: #ff5a2e;
+  background-color: #69049f;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(255, 113, 73, 0.4);
 }
