@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from './Componenets/Header/Header'
 import HomeBanner from './Componenets/HomeBanner/HomeBanner'
 import HomeHero from './Componenets/HomeHero/HomeHero'
 import HomeServices from './Componenets/HomeServices/HomeServices'
@@ -11,15 +10,14 @@ import LatestBlogs from './Componenets/LatestBlogs/LatestBlogs.jsx'
 import TransactionTable from './Componenets/TransactionTable/TransactionTable.jsx'
 import Newsletter from './Componenets/Newsletter/Newsletter.jsx'
 import PaymentSlider from './Componenets/PaymentSlider/PaymentSlider.jsx'
-import Footer from './Componenets/Footer/Footer.jsx'
 import VideoSection from './Componenets/VideoSection/VideoSection.jsx'
+import TestimonialSection from './Componenets/TestimonialSection/TestimonialSection.jsx'
 
 
 
 function Home() {
   return (
     <div>
-        <Header/>
         <HomeBanner/>
         <HomeHero/>
         <HomeServices/>
@@ -28,11 +26,12 @@ function Home() {
         <HomePricing/>
         <ExpertTeam/>
         <RevCounter/>
+        <TestimonialSection/>
         <LatestBlogs/>
         <TransactionTable/>
         <Newsletter/>
         <PaymentSlider/>
-        <Footer/>
+
       
     </div>
   )

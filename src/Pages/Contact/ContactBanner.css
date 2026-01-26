@@ -1,0 +1,72 @@
+.contact-banner-container {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://script.viserlab.com/revptc/assets/images/frontend/breadcrumb/6381fefd2975c1669463805.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 0;
+}
+
+.contact-banner-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 20, 60, 0.6);
+  z-index: 1;
+}
+
+.contact-overlay-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+}
+
+.contact-main-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contact-breadcrumb-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-breadcrumb-list {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.contact-link {
+  color: #ff5e33; 
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #ffffff;
+}
+
+.contact-breadcrumb-separator {
+  margin: 0 10px;
+  color: #ff5e33;
+}
+
+.contact-active {
+  color: #ffffff;
+}

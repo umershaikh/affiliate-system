@@ -1,13 +1,14 @@
-/* --- Base Styles (Desktop) --- */
-.full-header-div{
-background: transparent;
+/* --- Base Styles --- */
+.full-header-div {
+  background: transparent;
+  width: 100%;
 }
+
 .navbar-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 60px;
-  
   color: #ffffff;
   font-family: 'Inter', sans-serif;
   position: relative;
@@ -17,14 +18,9 @@ background: transparent;
 }
 
 .logo-img {
-  height: 100px; /* Adjust this height to match your design */
-  width: auto;  /* Maintains aspect ratio */
+  height: 60px;
+  width: auto;
   display: block;
-}
-
-.navbar-logo {
-  display: flex;
-  align-items: center;
 }
 
 .nav-content {
@@ -35,40 +31,74 @@ background: transparent;
   margin-left: 40px;
 }
 
+/* --- Navigation Pill --- */
 .navbar-pill {
   display: flex;
-  gap: 32px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 14px 45px;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 6px;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.03);
-  margin: 0 auto; /* Center the pill */
+  background: rgba(255, 255, 255, 0.05);
+  margin: 0 auto;
 }
 
 .nav-link {
   text-decoration: none;
   color: #ffffff;
   font-size: 14px;
-  opacity: 0.8;
-  transition: 0.2s;
+  opacity: 0.7;
+  padding: 10px 22px;
+  border-radius: 50px;
+  transition: opacity 0.3s ease; /* Only transition opacity, not background */
 }
 
+.nav-link:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- ACTIVE STATE --- */
+.nav-link.active {
+  opacity: 1;
+  background: #ffffff !important;
+  color: #000000 !important;
+  font-weight: 600;
+  transition: none; /* Snap into place immediately on page load */
+}
+
+/* --- Right Side --- */
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
+.phone-number {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.separator {
+  opacity: 0.3;
+}
+
 .signup-btn {
   background: transparent;
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 10px 24px;
   border-radius: 50px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-/* --- Hamburger Menu (Hidden on Desktop) --- */
+.signup-btn:hover {
+  background: white;
+  color: #000;
+}
+
+/* --- Mobile Styles --- */
 .hamburger {
   display: none;
   cursor: pointer;
@@ -84,59 +114,37 @@ background: transparent;
   transition: 0.4s;
 }
 
-/* --- Responsive Styles (Mobile/Tablet) --- */
 @media (max-width: 1024px) {
-  .navbar-container {
-    padding: 20px 30px;
-  }
+  .hamburger { display: flex; }
 
-  .hamburger {
-    display: flex;
-  }
-
-  /* Hamburger Animation */
   .hamburger.active .bar:nth-child(2) { opacity: 0; }
   .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-  /* Mobile Menu Container */
   .nav-content {
     position: fixed;
     top: 0;
-    right: -100%; /* Hidden by default */
-    /* width: 80%; */
+    right: -100%;
+    width: 100%;
     height: 100vh;
-    background: #02040a;
+    background: #0a0b1e;
     flex-direction: column;
     justify-content: center;
     gap: 40px;
     transition: 0.4s ease-in-out;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 0;
   }
 
-  .nav-content.open {
-    right: 0;
-  }
+  .nav-content.open { right: 0; }
 
   .navbar-pill {
     flex-direction: column;
     border: none;
     background: transparent;
-    gap: 30px;
-    align-items: center;
   }
 
-  .navbar-right {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .separator {
-    display: none; /* Hide vertical line on mobile */
-  }
-
-  .nav-link {
-    font-size: 20px;
-  }
+  .nav-link { font-size: 24px; }
+  
+  .navbar-right { flex-direction: column; }
+  
+  .separator { display: none; }
 }

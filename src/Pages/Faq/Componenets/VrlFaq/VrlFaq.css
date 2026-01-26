@@ -1,0 +1,113 @@
+/* VRL Specific FAQ Styles using Grid */
+.vrl-faq-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.vrl-faq-container {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.vrl-faq-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.vrl-faq-sub {
+    color: #ff6b35; /* Primary Orange */
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.vrl-faq-main {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+.vrl-faq-divider {
+    height: 15px;
+    background: url('https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png') no-repeat center;
+    display: block;
+}
+
+/* Grid Layout Implementation */
+.vrl-faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 30px; /* Horizontal gap */
+}
+
+.vrl-faq-item {
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    height: fit-content;
+}
+
+.vrl-faq-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #ffffff;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.vrl-faq-title {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.vrl-faq-icon {
+    font-size: 20px;
+    color: #ff6b35;
+}
+
+/* Open/Active State */
+.vrl-faq-item.is-open .vrl-faq-trigger {
+    background-color: #ff6b35;
+}
+
+.vrl-faq-item.is-open .vrl-faq-title,
+.vrl-faq-item.is-open .vrl-faq-icon {
+    color: #ffffff;
+}
+
+.vrl-faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-in-out;
+}
+
+.vrl-faq-item.is-open .vrl-faq-body {
+    max-height: 1000px;
+    border-top: 1px solid #ebebeb;
+}
+
+.vrl-faq-content {
+    padding: 20px;
+    font-size: 14.5px;
+    line-height: 1.8;
+    color: #555555;
+}
+
+/* Responsive Grid */
+@media (max-width: 991px) {
+    .vrl-faq-grid {
+        grid-template-columns: 1fr;
+    }
+}

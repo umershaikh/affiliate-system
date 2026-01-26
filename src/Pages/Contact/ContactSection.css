@@ -1,0 +1,161 @@
+/* Universal box sizing for this specific section */
+.ct-ui-wrapper * {
+    box-sizing: border-box;
+}
+
+.ct-ui-wrapper {
+    background: url('https://script.viserlab.com/revptc/assets/images/frontend/contact_us/6382005b6f9281669464155.png') no-repeat center;
+    background-size: cover;
+    padding: 80px 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.ct-ui-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.ct-ui-flex-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+/* Sidebar Info Styles */
+.ct-ui-sidebar {
+    flex: 1;
+    min-width: 280px;
+}
+
+.ct-ui-info-card {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 35px;
+}
+
+.ct-ui-icon-box {
+    background-color: #ff6f43; /* Exact UI Orange */
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.ct-ui-heading {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+}
+
+.ct-ui-desc {
+    margin: 5px 0 0;
+    color: #555;
+    font-size: 15px;
+}
+
+/* Main Form Area */
+.ct-ui-main-content {
+    flex: 2;
+    min-width: 0; /* Critical for preventing input overflow */
+}
+
+.ct-ui-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ct-ui-row.ct-ui-split {
+    display: flex;
+    gap: 20px;
+}
+
+.ct-ui-field-group {
+    flex: 1;
+}
+
+.ct-ui-input {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.85);
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.ct-ui-input:focus {
+    border-color: #ff6f43;
+    background: #fff;
+}
+
+.ct-ui-textarea {
+    height: 180px;
+    resize: none;
+}
+
+/* Captcha Scaling Logic */
+.ct-ui-captcha-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.ct-ui-captcha-scaler {
+    transform-origin: left top;
+}
+
+.ct-ui-submit-btn {
+    background-color: #ff6f43;
+    color: #fff;
+    border: none;
+    padding: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.ct-ui-submit-btn:hover {
+    background-color: #e55a2d;
+}
+
+/* --- RESPONSIVENESS --- */
+
+@media (max-width: 991px) {
+    .ct-ui-flex-grid {
+        flex-direction: column;
+    }
+    .ct-ui-sidebar, .ct-ui-main-content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 650px) {
+    .ct-ui-row.ct-ui-split {
+        flex-direction: column;
+    }
+    
+    .ct-ui-captcha-scaler {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 400px) {
+    .ct-ui-captcha-scaler {
+        transform: scale(0.7);
+    }
+}

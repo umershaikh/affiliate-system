@@ -1,46 +1,80 @@
-import AwpLogo from "../../../../Images/AwpLogo.png"
-import React, { useState } from 'react';
-import "./Header.css"
+import React, { useState, useEffect } from 'react';
+import AwpLogo from "../../../../Images/AwpLogo.png";
+import "./Header.css";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  // Helper to get current path name for state initialization
+  const getCurrentPage = () => {
+    const path = window.location.pathname.toLowerCase().replace('/', '');
+    return path || 'home'; 
   };
+
+  // INITIALIZE state directly from the URL to prevent flickering
+  const [activeLink, setActiveLink] = useState(getCurrentPage());
+
+  const navLinks = [
+    { name: 'Home', path: '/home' },
+    { name: 'About', path: '/about' },
+    { name: 'Faq', path: '/faq' },
+    { name: 'Plan', path: '/plan' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Contact', path: '/contact' }
+  ];
+
+  // Sync state if the user hits the back/forward button
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setActiveLink(getCurrentPage());
+    };
+    window.addEventListener('popstate', handleLocationChange);
+    return () => window.removeEventListener('popstate', handleLocationChange);
+  }, []);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <div className='full-header-div'>
-    <nav className="navbar-container">
-      {/* Logo replaced with Image */}
-      <div className="navbar-logo">
-        <img src={AwpLogo} alt="Bodar Logo" className="logo-img" />
-      </div>
-
-      {/* Hamburger Menu Icon (Mobile Only) */}
-      <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
-      </div>
-
-      {/* Nav Content - Desktop Pill & Mobile Menu */}
-      <div className={`nav-content ${isMenuOpen ? 'open' : ''}`}>
-        <div className="navbar-pill">
-          <a href="#home" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</a>
-          <a href="#about" className="nav-link" onClick={() => setIsMenuOpen(false)}>About</a>
-          <a href="#services" className="nav-link" onClick={() => setIsMenuOpen(false)}>Capabilities</a>
-          <a href="#terms" className="nav-link" onClick={() => setIsMenuOpen(false)}>Partner with Zynterris</a>
+      <nav className="navbar-container">
+        <div className="navbar-logo">
+          <img src={AwpLogo} alt="Logo" className="logo-img" />
         </div>
 
-        <div className="navbar-right">
-          <span className="phone-number">(+62 123 4567 980)</span>
-          <span className="separator">|</span>
-          <a href="#help" className="nav-link" onClick={() => setIsMenuOpen(false)}>Help Center</a>
-          <button className="signup-btn">Sign Up</button>
+        <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+          <span className="bar"></span>
+          <span className="bar"></span>
+          <span className="bar"></span>
         </div>
-      </div>
-    </nav>
+
+        <div className={`nav-content ${isMenuOpen ? 'open' : ''}`}>
+          <div className="navbar-pill">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.path}
+                className={`nav-link ${activeLink === link.name.toLowerCase() ? 'active' : ''}`}
+                onClick={() => setActiveLink(link.name.toLowerCase())}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+
+          <div className="navbar-right">
+            <span className="phone-number">(+62 123 4567 980)</span>
+            <span className="separator">|</span>
+            <a 
+              href="/help" 
+              className={`nav-link ${activeLink === 'help' ? 'active' : ''}`}
+              onClick={() => setActiveLink('help')}
+            >
+              Help Center
+            </a>
+            <button className="signup-btn">Sign Up</button>
+          </div>
+        </div>
+      </nav>
     </div>
   );
 };
