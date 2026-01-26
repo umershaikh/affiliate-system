@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Added this import
 import AwpLogo from "../../../../Images/AwpLogo.png";
 import "./Header.css";
 
@@ -50,27 +51,33 @@ const Header = () => {
         <div className={`nav-content ${isMenuOpen ? 'open' : ''}`}>
           <div className="navbar-pill">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.path}
+                to={link.path} // Changed href to to
                 className={`nav-link ${activeLink === link.name.toLowerCase() ? 'active' : ''}`}
-                onClick={() => setActiveLink(link.name.toLowerCase())}
+                onClick={() => {
+                  setActiveLink(link.name.toLowerCase());
+                  setIsMenuOpen(false); // Close menu on click
+                }}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="navbar-right">
             <span className="phone-number">(+62 123 4567 980)</span>
             <span className="separator">|</span>
-            <a 
-              href="/help" 
+            <Link 
+              to="/help"  // Changed href to to
               className={`nav-link ${activeLink === 'help' ? 'active' : ''}`}
-              onClick={() => setActiveLink('help')}
+              onClick={() => {
+                setActiveLink('help');
+                setIsMenuOpen(false);
+              }}
             >
               Help Center
-            </a>
+            </Link>
             <button className="signup-btn">Sign Up</button>
           </div>
         </div>
