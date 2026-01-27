@@ -7,13 +7,8 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Helper to determine active state based on the current URL path
-  const getCurrentPage = () => {
-    const path = location.pathname.toLowerCase().replace('/', '');
-    return path || 'home'; 
-  };
-
-  const [activeLink, setActiveLink] = useState(getCurrentPage());
+  // Initialize state based on current path
+  const [activeLink, setActiveLink] = useState('');
 
   const navLinks = [
     { name: 'Home', path: '/home' },
@@ -24,10 +19,11 @@ const Header = () => {
     { name: 'Contact', path: '/contact' }
   ];
 
-  // Automatically update activeLink whenever the URL location changes
+  // Logic moved inside useEffect to satisfy exhaustive-deps
   useEffect(() => {
-    setActiveLink(getCurrentPage());
-  }, [location]);
+    const path = location.pathname.toLowerCase().replace('/', '');
+    setActiveLink(path || 'home');
+  }, [location]); // Now only depends on location
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -38,7 +34,6 @@ const Header = () => {
           <img src={AwpLogo} alt="Logo" className="logo-img" />
         </div>
 
-        {/* Mobile Menu Toggle */}
         <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
           <span className="bar"></span>
           <span className="bar"></span>
@@ -71,7 +66,6 @@ const Header = () => {
               Help Center
             </Link>
 
-            {/* Login Link styled as a button */}
             <Link 
               to="/login" 
               className="signup-btn"
