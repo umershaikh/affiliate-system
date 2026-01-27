@@ -56,10 +56,6 @@ const TestimonialSection = () => {
         <div className="rev-section-header">
           <span className="rev-sub-title">Our Clients</span>
           <h2 className="rev-main-title">What People Say About Us</h2>
-          <span 
-            className="rev-title-border" 
-            style={{ backgroundImage: `url('https://script.viserlab.com/revptc/assets/templates/basic/images/icon-title.png')` }}
-          ></span>
         </div>
 
         <Swiper

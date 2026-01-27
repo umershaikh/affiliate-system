@@ -28,7 +28,6 @@ const VrlFaq = () => {
                         We always care for our clients, we have tried to answer some frequent questions about your business
                     </span>
                     <h2 className="vrl-faq-main">A Frequently Asked Questions</h2>
-                    <div className="vrl-faq-divider"></div>
                 </div>
 
                 <div className="vrl-faq-grid">
