@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Added this import
+import { Link, useLocation } from 'react-router-dom';
 import AwpLogo from "../../../../Images/AwpLogo.png";
 import "./Header.css";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
-  // Helper to get current path name for state initialization
+  // Helper to determine active state based on the current URL path
   const getCurrentPage = () => {
-    const path = window.location.pathname.toLowerCase().replace('/', '');
+    const path = location.pathname.toLowerCase().replace('/', '');
     return path || 'home'; 
   };
 
-  // INITIALIZE state directly from the URL to prevent flickering
   const [activeLink, setActiveLink] = useState(getCurrentPage());
 
   const navLinks = [
@@ -24,14 +24,10 @@ const Header = () => {
     { name: 'Contact', path: '/contact' }
   ];
 
-  // Sync state if the user hits the back/forward button
+  // Automatically update activeLink whenever the URL location changes
   useEffect(() => {
-    const handleLocationChange = () => {
-      setActiveLink(getCurrentPage());
-    };
-    window.addEventListener('popstate', handleLocationChange);
-    return () => window.removeEventListener('popstate', handleLocationChange);
-  }, []);
+    setActiveLink(getCurrentPage());
+  }, [location]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -42,6 +38,7 @@ const Header = () => {
           <img src={AwpLogo} alt="Logo" className="logo-img" />
         </div>
 
+        {/* Mobile Menu Toggle */}
         <div className={`hamburger ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
           <span className="bar"></span>
           <span className="bar"></span>
@@ -53,12 +50,9 @@ const Header = () => {
             {navLinks.map((link) => (
               <Link
                 key={link.name}
-                to={link.path} // Changed href to to
+                to={link.path}
                 className={`nav-link ${activeLink === link.name.toLowerCase() ? 'active' : ''}`}
-                onClick={() => {
-                  setActiveLink(link.name.toLowerCase());
-                  setIsMenuOpen(false); // Close menu on click
-                }}
+                onClick={() => setIsMenuOpen(false)}
               >
                 {link.name}
               </Link>
@@ -68,17 +62,24 @@ const Header = () => {
           <div className="navbar-right">
             <span className="phone-number">(+62 123 4567 980)</span>
             <span className="separator">|</span>
+            
             <Link 
-              to="/help"  // Changed href to to
+              to="/help"
               className={`nav-link ${activeLink === 'help' ? 'active' : ''}`}
-              onClick={() => {
-                setActiveLink('help');
-                setIsMenuOpen(false);
-              }}
+              onClick={() => setIsMenuOpen(false)}
             >
               Help Center
             </Link>
-            <button className="signup-btn">Sign Up</button>
+
+            {/* Login Link styled as a button */}
+            <Link 
+              to="/login" 
+              className="signup-btn"
+              style={{ textDecoration: 'none', textAlign: 'center' }}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Login
+            </Link>
           </div>
         </div>
       </nav>

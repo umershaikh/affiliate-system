@@ -4,6 +4,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  useLocation,
+  Navigate, // Added Navigate for redirection
 } from "react-router-dom";
 
 // Importing your specific components
@@ -15,12 +17,15 @@ import Blog from "./Pages/Blog/Blog";
 import Contact from "./Pages/Contact/Contact";
 import Header from "./Pages/Home/Componenets/Header/Header";
 import Footer from "./Pages/Home/Componenets/Footer/Footer";
+import LoginPage from "./Pages/LoginPage/LoginPage";
 
-function App() {
+function AppContent() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+
   return (
     <div className="App">
-      {/* Header and Footer now show on every single page automatically */}
-      <Header />
+      {!isLoginPage && <Header />}
       
       <main className="main-content">
         <Routes>
@@ -31,22 +36,22 @@ function App() {
           <Route path="/plan" element={<Plan />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
-          
-          {/* Catch-all: redirects unknown URLs to Home */}
-          <Route path="*" element={<Home />} />
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* This handles the "wrong link" by redirecting to Home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
-      <Footer />
+      {!isLoginPage && <Footer />}
     </div>
   );
 }
 
-// Wrapping in Router to enable navigation features
 export default function AppWrapper() {
   return (
     <Router>
-      <App />
+      <AppContent />
     </Router>
   );
 }

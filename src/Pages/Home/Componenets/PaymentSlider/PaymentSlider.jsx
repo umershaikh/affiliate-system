@@ -26,7 +26,7 @@ const PaymentSlider = () => {
                         <div className="vslSectionHeader">
                             <h3 className="vslSubTitle">PAYMENT METHODS</h3>
                             <h2 className="vslSectionTitle">Our Local Payment Options</h2>
-                            <div className="vslTitleBorder"></div>
+
                         </div>
                     </div>
                 </div>
