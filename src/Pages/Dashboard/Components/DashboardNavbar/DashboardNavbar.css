@@ -1,0 +1,105 @@
+.db-nav-wrapper {
+  --db-main-bg: #071251;
+  --db-input-bg: rgba(255, 255, 255, 0.08);
+  --db-accent: #4634ff;
+  --db-danger: #eb4444;
+  
+  background-color: var(--db-main-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  height: 60px;
+  color: #ffffff;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Left Section */
+.db-nav-left { display: flex; align-items: center; gap: 20px; }
+
+/* ANIMATED TOGGLE BUTTON */
+.db-nav-res-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  z-index: 1100;
+}
+
+.db-nav-res-btn .line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Animation to Cross */
+.db-nav-res-btn.active .line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.db-nav-res-btn.active .line:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+.db-nav-res-btn.active .line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Rest of your existing CSS */
+.db-nav-search-form { position: relative; }
+.db-nav-search-input {
+  background: var(--db-input-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 7px 12px 7px 35px;
+  color: white;
+  width: 220px;
+  font-size: 14px;
+}
+.db-nav-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888fb3;
+}
+
+/* Right Section Actions */
+.db-nav-action-list { display: flex; align-items: center; list-style: none; gap: 8px; margin: 0; }
+.db-nav-icon-btn {
+  background: none; border: none; color: white; font-size: 18px;
+  padding: 8px; cursor: pointer; position: relative; border-radius: 50%;
+}
+.db-nav-badge {
+  position: absolute; top: 2px; right: 2px; background: var(--db-danger);
+  font-size: 9px; padding: 2px 4px; border-radius: 10px; line-height: 1;
+}
+
+/* Dropdowns & Profile Styles (Same as before) */
+.db-nav-profile-trigger { display: flex; align-items: center; gap: 10px; background: none; border: none; color: white; cursor: pointer; }
+.db-nav-avatar { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; border: 2px solid var(--db-accent); }
+.db-nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.db-nav-dropdown-rel { position: relative; }
+.db-nav-dropdown-menu {
+  position: absolute; right: 0; top: 120%; background: white; color: #333;
+  border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: dbNavFadeIn 0.2s ease-out;
+}
+@keyframes dbNavFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1024px) {
+  .db-nav-search-form, .db-nav-username { display: none; }
+}
+
+@media (min-width: 1025px) {
+  .db-nav-res-btn { display: none; }
+}

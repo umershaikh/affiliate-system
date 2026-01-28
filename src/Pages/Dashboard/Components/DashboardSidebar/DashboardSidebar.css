@@ -1,0 +1,120 @@
+/* 1. ROOT CONTAINER */
+.rps-sidebar-root {
+  width: 260px;
+  height: 100vh;
+  background-color: #050530;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: #b4b4c3;
+  user-select: none;
+  position: sticky; /* Keeps it fixed to the side during scroll */
+  top: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 2. LOGO SECTION */
+.rps-logo-wrapper {
+  padding: 30px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rps-brand-name {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.rps-brand-accent {
+  color: #ff7a45;
+}
+
+/* 3. NAVIGATION LIST */
+.rps-nav-list {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #1a1a3c transparent;
+}
+
+.rps-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  margin: 4px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rps-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+/* 4. ACTIVE STATE */
+.rps-item-active {
+  background-color: #4e44ff !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 15px rgba(78, 68, 255, 0.25);
+}
+
+.rps-item-content {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rps-item-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rps-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 5. UI ELEMENTS */
+.rps-alert-badge {
+  background-color: #ff9f43;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.rps-chevron-icon {
+  opacity: 0.4;
+}
+
+/* 6. FOOTER */
+.rps-sidebar-footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.rps-v-text { color: #4e44ff; letter-spacing: 1px; }
+.rps-v-num { color: #28c76f; margin-left: 4px; }
+
+/* Custom Scrollbar */
+.rps-nav-list::-webkit-scrollbar {
+  width: 4px;
+}
+.rps-nav-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
