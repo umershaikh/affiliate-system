@@ -8,7 +8,6 @@ import {
   Navigate,
 } from "react-router-dom";
 
-// Importing your specific components
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
 import Faq from "./Pages/Faq/Faq";
@@ -23,15 +22,13 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 function AppContent() {
   const location = useLocation();
 
-  // This array contains all paths where Header and Footer should be HIDDEN
-  const noLayoutRequired = ["/login", "/dashboard"];
-  
-  // Checks if the current path is in the array above
-  const isNoLayoutPage = noLayoutRequired.includes(location.pathname);
+  // FIX: Check if the path STARTS with /dashboard or is exactly /login
+  const isNoLayoutPage = 
+    location.pathname.startsWith("/dashboard") || 
+    location.pathname === "/login";
 
   return (
     <div className="App">
-      {/* Header hidden on Login and Dashboard */}
       {!isNoLayoutPage && <Header />}
       
       <main className="main-content">
@@ -44,14 +41,14 @@ function AppContent() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          
+          {/* FIX: Added /* to allow the Dashboard's internal Routes to work */}
+          <Route path="/dashboard/*" element={<Dashboard />} />
 
-          {/* This handles the "wrong link" by redirecting to Home */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
-      {/* Footer hidden on Login and Dashboard */}
       {!isNoLayoutPage && <Footer />}
     </div>
   );
