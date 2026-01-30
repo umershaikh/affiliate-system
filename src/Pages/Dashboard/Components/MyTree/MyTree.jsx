@@ -6,45 +6,45 @@ const treeData = {
   status: "root",
   children: [
     {
-      name: "Sub user",
+      name: "Subuser",
       status: "active",
       children: [
         {
-          name: "xumojyxiku",
+          name: "Subuser",
           status: "active",
           children: [
-            { name: "oikonom", status: "filled" },
-            { name: "No User", status: "empty" }
+            { name: "Subuser", status: "filled" },
+            { name: "Subuser", status: "empty" }
           ]
         },
         {
-          name: "aaaaaaaaaa",
+          name: "Subuser",
           status: "active",
           children: [
-            { name: "demotest", status: "filled" },
-            { name: "poliloip", status: "filled" }
+            { name: "Subuser", status: "filled" },
+            { name: "Subuser", status: "filled" }
           ]
         }
       ]
     },
     {
-      name: "Sub user",
+      name: "Subuser",
       status: "filled",
       children: [
         {
-          name: "No User",
+          name: "Subuser",
           status: "empty",
           children: [
-            { name: "No User", status: "empty" },
-            { name: "No User", status: "empty" }
+            { name: "Subuser", status: "empty" },
+            { name: "Subuser", status: "empty" }
           ]
         },
         {
-          name: "qwerty",
+          name: "Subuser",
           status: "filled",
           children: [
-            { name: "hudipermns", status: "filled" },
-            { name: "revptcl", status: "filled" }
+            { name: "Subuser", status: "filled" },
+            { name: "Subuser", status: "filled" }
           ]
         }
       ]
@@ -59,9 +59,15 @@ const TreeNode = ({ node, isRoot = false }) => {
         <div className={`MT_avatar_outer ${node.status}`}>
           <div className="MT_avatar_inner">
             {node.status === 'empty' ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
             ) : (
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+              </svg>
             )}
           </div>
         </div>

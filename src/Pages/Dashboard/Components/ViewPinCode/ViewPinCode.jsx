@@ -1,11 +1,29 @@
-import React from 'react'
+import React from 'react';
+import './ViewPinCode.css';
 
-function ViewPinCode() {
+const ViewPinCode = () => {
   return (
-<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
-    Coming Soon
-</div>
-  )
-}
+    <div className="vpc-container">
+      {/* Breadcrumb Section */}
+      <nav className="vpc-breadcrumb">
+        <span className="vpc-home-icon">🏠</span>
+        <span className="vpc-separator">/</span>
+        <span className="vpc-breadcrumb-current">View Pin-Code</span>
+      </nav>
 
-export default ViewPinCode
+      <h1 className="vpc-page-title">View Pin-Code</h1>
+
+      {/* Main Card */}
+      <div className="vpc-card">
+        <div className="vpc-card-header">
+          Pins List
+        </div>
+        <div className="vpc-card-body">
+          <p className="vpc-no-data">No data available</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ViewPinCode;
