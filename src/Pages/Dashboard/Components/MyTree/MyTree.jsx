@@ -2,11 +2,11 @@ import React from 'react';
 import './MyTree.css';
 
 const treeData = {
-  name: "Parent",
+  name: "user",
   status: "root",
   children: [
     {
-      name: "Sub Parent",
+      name: "Sub user",
       status: "active",
       children: [
         {
@@ -28,7 +28,7 @@ const treeData = {
       ]
     },
     {
-      name: "Sub Parent",
+      name: "Sub user",
       status: "filled",
       children: [
         {
