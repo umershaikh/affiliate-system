@@ -1,0 +1,185 @@
+/* Prefix: ca- (Create Account) */
+.ca-unique-wrapper {
+  background-color: #f1f5f9;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  padding-bottom: 40px;
+}
+
+/* Header Styles */
+.ca-top-nav {
+  background: white;
+  padding: 12px 25px;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 40px;
+}
+
+.ca-breadcrumb {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 5px;
+}
+
+.ca-nav-title {
+  font-size: 18px;
+  margin: 0;
+  color: #334155;
+  font-weight: 600;
+}
+
+/* Card Styles */
+.ca-main-content {
+  display: flex;
+  justify-content: center;
+  padding: 0 15px;
+}
+
+.ca-form-card {
+  background: white;
+  width: 100%;
+  max-width: 520px;
+  padding: 35px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.ca-card-heading {
+  text-align: center;
+  color: #1e293b;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.ca-urdu-instruction {
+  text-align: center;
+  direction: rtl;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Input Fields */
+.ca-input-field {
+  position: relative;
+  margin-bottom: 22px;
+}
+
+.ca-input-field label {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: white;
+  padding: 0 5px;
+  font-size: 12px;
+  color: #64748b;
+  z-index: 10;
+}
+
+.ca-input-inner {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+}
+
+.ca-input-inner:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.ca-icon {
+  font-size: 16px;
+  margin-right: 12px;
+  color: #64748b;
+}
+
+.ca-input-inner input {
+  border: none;
+  outline: none;
+  width: 100%;
+  padding: 4px 0;
+  font-size: 14px;
+  color: #334155;
+}
+
+/* Select Box */
+.ca-select-box {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #fff;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Radio and Checkbox */
+.ca-radio-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.ca-radio-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: #334155;
+}
+
+.ca-radio-container input {
+  margin-right: 8px;
+  accent-color: #3b82f6;
+}
+
+.ca-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #334155;
+  margin-bottom: 25px;
+}
+
+.ca-checkbox-row input {
+  width: 16px;
+  height: 16px;
+}
+
+/* Submit Button */
+.ca-submit-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #ff5035, #ec2d5e);
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 4px 15px rgba(236, 45, 94, 0.3);
+}
+
+.ca-submit-btn:hover {
+  opacity: 0.9;
+}
+
+/* Urdu Placeholder Alignment */
+::placeholder {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .ca-form-card {
+    padding: 20px;
+    margin: 0 10px;
+  }
+}
