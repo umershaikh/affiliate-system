@@ -1,11 +1,95 @@
-import React from 'react'
+import React from 'react';
+import './MyTree.css';
 
-function MyTree() {
+const treeData = {
+  name: "Parent",
+  status: "root",
+  children: [
+    {
+      name: "Sub Parent",
+      status: "active",
+      children: [
+        {
+          name: "xumojyxiku",
+          status: "active",
+          children: [
+            { name: "oikonom", status: "filled" },
+            { name: "No User", status: "empty" }
+          ]
+        },
+        {
+          name: "aaaaaaaaaa",
+          status: "active",
+          children: [
+            { name: "demotest", status: "filled" },
+            { name: "poliloip", status: "filled" }
+          ]
+        }
+      ]
+    },
+    {
+      name: "Sub Parent",
+      status: "filled",
+      children: [
+        {
+          name: "No User",
+          status: "empty",
+          children: [
+            { name: "No User", status: "empty" },
+            { name: "No User", status: "empty" }
+          ]
+        },
+        {
+          name: "qwerty",
+          status: "filled",
+          children: [
+            { name: "hudipermns", status: "filled" },
+            { name: "revptcl", status: "filled" }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+const TreeNode = ({ node, isRoot = false }) => {
   return (
-<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
-    Coming Soon
-</div>
-  )
-}
+    <div className={`MT_node_branch ${isRoot ? 'MT_is_root' : ''}`}>
+      <div className="MT_node_item">
+        <div className={`MT_avatar_outer ${node.status}`}>
+          <div className="MT_avatar_inner">
+            {node.status === 'empty' ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            )}
+          </div>
+        </div>
+        <span className="MT_node_name">{node.name}</span>
+      </div>
 
-export default MyTree
+      {node.children && node.children.length > 0 && (
+        <div className="MT_children_wrapper">
+          {node.children.map((child, index) => (
+            <TreeNode key={index} node={child} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const MyTree = () => {
+  return (
+    <div className="MT_page_bg">
+      <div className="MT_card_container">
+        <h2 className="MT_card_title">My Tree</h2>
+        <div className="MT_tree_flow">
+          <TreeNode node={treeData} isRoot={true} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MyTree;

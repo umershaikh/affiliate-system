@@ -1,0 +1,186 @@
+:root {
+  --mt-dot-color: #cbd5e0;
+  --mt-green: #4ade80;
+  --mt-blue: #3b82f6;
+  --mt-dark: #2d3748;
+}
+
+.MT_page_bg {
+  background-color: #f7f9fc;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.MT_card_container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 1200px;
+  padding: 30px;
+  /* Crucial for mobile scrolling */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.MT_card_title {
+  color: #4a5568;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+
+.MT_tree_flow {
+  display: flex;
+  /* 'safe' ensures that if the content overflows, it aligns to the start 
+     so it's not cut off on the left. */
+  justify-content: safe center;
+  /* Ensures the container expands to fit the full width of the tree */
+  min-width: max-content;
+  padding: 20px;
+}
+
+/* Fallback for browsers that don't support 'safe center' yet */
+@supports not (justify-content: safe center) {
+  .MT_tree_flow {
+    justify-content: center;
+  }
+}
+
+/* Base Node Positioning */
+.MT_node_branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 0 10px;
+}
+
+/* THE FIRST PARENT LINE / STEM */
+.MT_children_wrapper {
+  display: flex;
+  position: relative;
+  padding-top: 60px;
+  margin-top: 15px;
+}
+
+.MT_children_wrapper::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  height: 50px;
+  border-left: 1.5px dotted var(--mt-dot-color);
+}
+
+/* Horizontal line connecting siblings */
+.MT_node_branch:not(:only-child)::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  border-top: 1.5px dotted var(--mt-dot-color);
+}
+
+.MT_node_branch:first-child::after {
+  left: 50%;
+  width: 50%;
+}
+.MT_node_branch:last-child::after {
+  right: 50%;
+  width: 50%;
+}
+.MT_node_branch:only-child::after {
+  display: none;
+}
+
+/* ARROW HEADS */
+.MT_node_branch:not(.MT_is_root)::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: calc(50% - 4px);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 7px solid var(--mt-dot-color);
+  z-index: 10;
+}
+
+/* Node UI Styling */
+.MT_node_item {
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px;
+}
+
+.MT_avatar_outer {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid transparent;
+  background: #fff;
+}
+
+.MT_avatar_inner {
+  width: 52px;
+  height: 52px;
+  background: var(--mt-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.MT_avatar_inner svg {
+  width: 22px;
+  opacity: 0.9;
+}
+
+/* Status Logic */
+.MT_avatar_outer.root {
+  border-color: var(--mt-green);
+}
+.MT_avatar_outer.root .MT_avatar_inner {
+  background: var(--mt-blue);
+}
+.MT_avatar_outer.active {
+  border-color: var(--mt-green);
+}
+.MT_avatar_outer.filled {
+  border-color: var(--mt-dark);
+}
+.MT_avatar_outer.empty {
+  border-color: #e2e8f0;
+}
+.MT_avatar_outer.empty .MT_avatar_inner {
+  background: #cbd5e0;
+}
+
+.MT_node_name {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsiveness adjustments */
+@media (max-width: 768px) {
+  .MT_card_container {
+    padding: 15px; /* More space for the tree on small screens */
+  }
+  .MT_node_branch {
+    padding: 0 5px; /* Tighten spacing slightly */
+  }
+}
