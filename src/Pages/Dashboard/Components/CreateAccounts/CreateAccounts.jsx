@@ -32,9 +32,9 @@ const CreateAccounts = () => {
       {/* Top Header/Breadcrumb */}
       <div className="ca-top-nav">
         <div className="ca-breadcrumb">
-          <span className="ca-home-icon">🏠</span> / Create Account
+          <span className="ca-home-icon">🏠</span> / Join a User
         </div>
-        <h2 className="ca-nav-title">Create Account</h2>
+        <h2 className="ca-nav-title">Join a User</h2>
       </div>
 
       <div className="ca-main-content">

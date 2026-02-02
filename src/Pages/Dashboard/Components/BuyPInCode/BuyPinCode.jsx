@@ -9,9 +9,9 @@ const BuyPinCode = () => {
         <div className="bpc-breadcrumb">
           <span className="bpc-icon-home">🏠</span>
           <span className="bpc-sep">/</span>
-          <span className="bpc-text-muted">Buy Pin-Code</span>
+          <span className="bpc-text-muted">Request E-Pin</span>
         </div>
-        <h2 className="bpc-page-heading">Buy Pin-Code</h2>
+        <h2 className="bpc-page-heading">Request E-Pin</h2>
       </nav>
 
       <div className="bpc-content-body">

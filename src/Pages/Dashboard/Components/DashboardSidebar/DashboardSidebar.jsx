@@ -20,13 +20,14 @@ const DashboardSidebar = () => {
   const base = "/dashboard";
 
   const menuItems = [
-    { icon: LayoutDashboard, label: "Dashboard", path: `${base}` },
-    { icon: History, label: "Withdraw History", path: `${base}/withdraw` },
+    { icon: LayoutDashboard, label: "Home", path: `${base}` },
+    { icon: History, label: "Withdrawal History", path: `${base}/withdraw` },
     { icon: GitGraph, label: "My Tree", path: `${base}/tree` },
-    { icon: Medal, label: "Reward List", path: `${base}/rewards` },
-    { icon: UserPlus, label: "Create Accounts", path: `${base}/create-account` },
-    { icon: KeyRound, label: "Buy Pin Code", path: `${base}/buy-pin` },
-    { icon: Ticket, label: "View Pin Code", path: `${base}/view-pin` },
+        { icon: GitGraph, label: "Add watch & Earn", path: `${base}/watch-and-earn` },
+    { icon: Medal, label: "Alpha Bonuses", path: `${base}/rewards` },
+    { icon: UserPlus, label: "Join a User", path: `${base}/create-account` },
+    { icon: KeyRound, label: "Request E-pins", path: `${base}/buy-pin` },
+    { icon: Ticket, label: "Available E-pins", path: `${base}/view-pin` },
     { icon: Lock, label: "Change Password", path: `${base}/change-password` },
   ];
 

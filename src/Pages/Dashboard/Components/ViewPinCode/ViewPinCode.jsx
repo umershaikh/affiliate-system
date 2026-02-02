@@ -8,10 +8,10 @@ const ViewPinCode = () => {
       <nav className="vpc-breadcrumb">
         <span className="vpc-home-icon">🏠</span>
         <span className="vpc-separator">/</span>
-        <span className="vpc-breadcrumb-current">View Pin-Code</span>
+        <span className="vpc-breadcrumb-current">Available Pin Code</span>
       </nav>
 
-      <h1 className="vpc-page-title">View Pin-Code</h1>
+      <h1 className="vpc-page-title">Available Pin Code</h1>
 
       {/* Main Card */}
       <div className="vpc-card">

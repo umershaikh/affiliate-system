@@ -22,10 +22,10 @@ const RewardList = () => {
   return (
     <div className="rl-uniq-wrapper">
       <div className="rl-uniq-breadcrumb">
-        <span>🏠</span> / Reward List
+        <span>🏠</span> / Alpha Bonuses
       </div>
       
-      <h1 className="rl-uniq-header-text">Reward List</h1>
+      <h1 className="rl-uniq-header-text">Alpha Bonuses</h1>
 
       <div className="rl-uniq-reward-card">
         <div className="rl-uniq-blue-banner">

@@ -14,9 +14,9 @@ const WithdrawHistory = () => {
   return (
     <div className="wh-wrapper">
       <div className="wh-breadcrumb-nav">
-        <span className="wh-icon-home">🏠</span> / Withdraw History
+        <span className="wh-icon-home">🏠</span> / Withdrawal History
       </div>
-      <h2 className="wh-page-heading">Withdraw History</h2>
+      <h2 className="wh-page-heading">Withdrawal History</h2>
 
       <div className="wh-data-card">
         <div className="wh-data-header">

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import for navigation
+import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
 const LoginPage = () => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [status, setStatus] = useState({ loading: false, error: '' });
   
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate();
 
   const D_USER = "admin";
   const D_PASS = "12345";
@@ -23,7 +23,6 @@ const LoginPage = () => {
     // Simulate API delay
     setTimeout(() => {
       if (credentials.username === D_USER && credentials.password === D_PASS) {
-        // Redirect to /dashboard upon success
         navigate('/dashboard'); 
       } else {
         setStatus({ 
@@ -39,7 +38,14 @@ const LoginPage = () => {
       <div className="dynamic-glass-container">
         <form className="dynamic-login-form" onSubmit={handleLogin}>
           <header className="dynamic-form-header">
-            <h1 className="dynamic-brand-logo">NEXUS</h1>
+            <h1 className="dynamic-brand-logo">ALPHA</h1>
+            
+            <div className="company-description-urdu">
+              <p>Pakistan Alpha Wealth کی ایک جدید ڈیجیٹل سرمایہ کاری کمپنی ہے جو کہ لوگوں کو سرمایہ کاری کرنے کا موقع فراہم کرتی ہے۔</p>
+              <p>ہمارا مقصد صارفین کو محفوظ اور قابلِ اعتماد سرمایہ کاری کے مواقع فراہم کرنا ہے۔ اس کے ساتھ ساتھ کمپنی گاہکوں کو بہترین اور جدید سہولیات فراہم کرنے کے لیے کام کر رہی ہے۔</p>
+              <p>یہ ادارہ ایک منظم نظام کے تحت شفاف طریقے سے کام کرتا ہے۔</p>
+            </div>
+
             <p className="dynamic-subtitle">Authorization Required</p>
           </header>
 

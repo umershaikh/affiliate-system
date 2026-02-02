@@ -13,6 +13,7 @@ import CreateAccounts from './Components/CreateAccounts/CreateAccounts';
 import BuyPinCode from './Components/BuyPInCode/BuyPinCode';
 import ViewPinCode from './Components/ViewPinCode/ViewPinCode';
 import ChangePassword from './Components/ChangePassword/ChangePassword';
+import WatchAndEarn from './Components/Watch&Earn/WatchAndEarn';
 
 function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -51,7 +52,7 @@ function Dashboard() {
             <Route path="buy-pin" element={<BuyPinCode />} />
             <Route path="view-pin" element={<ViewPinCode />} />
             <Route path="change-password" element={<ChangePassword />} />
-            
+            <Route path="watch-and-earn" element={<WatchAndEarn />} />
             {/* Catch-all for dashboard sub-routes */}
             <Route path="*" element={<div>Page Not Found</div>} />
           </Routes>
