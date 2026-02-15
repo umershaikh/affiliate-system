@@ -8,8 +8,19 @@ const LoginPage = () => {
   
   const navigate = useNavigate();
 
-  const D_USER = "admin";
-  const D_PASS = "12345";
+  // Simple Credentials and Route Mapping
+  const USERS = {
+    admin: {
+      username: "admin",
+      password: "123", // Simple password
+      route: "/dashboard/admin/withdrawals-pending"
+    },
+    user: {
+      username: "user",
+      password: "123", // Simple password
+      route: "/dashboard"
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +33,18 @@ const LoginPage = () => {
 
     // Simulate API delay
     setTimeout(() => {
-      if (credentials.username === D_USER && credentials.password === D_PASS) {
-        navigate('/dashboard'); 
+      let authenticatedUser = null;
+
+      // Check credentials
+      if (credentials.username === USERS.admin.username && credentials.password === USERS.admin.password) {
+        authenticatedUser = USERS.admin;
+      } else if (credentials.username === USERS.user.username && credentials.password === USERS.user.password) {
+        authenticatedUser = USERS.user;
+      }
+
+      if (authenticatedUser) {
+        // Navigate based on role
+        navigate(authenticatedUser.route); 
       } else {
         setStatus({ 
           loading: false, 

@@ -1,3 +1,5 @@
+/* --- DashboardSidebar.css --- */
+
 /* 1. ROOT CONTAINER */
 .rps-sidebar-root {
   width: 260px;
@@ -8,17 +10,20 @@
   font-family: 'Inter', -apple-system, sans-serif;
   color: #b4b4c3;
   user-select: none;
-  position: sticky; /* Keeps it fixed to the side during scroll */
+  position: sticky;
   top: 0;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* --- Admin Style Variant --- */
+.rps-sidebar-root.admin-mode {
+  background-color: #2c003e; /* Dark Purple for Admin */
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* 2. LOGO SECTION */
 .rps-logo-wrapper {
-text-emphasis: sesame;
-padding-left: 35px;
-color: magenta;
-
+  padding: 20px 35px;
 }
 
 .rps-brand-name {
@@ -26,6 +31,7 @@ color: magenta;
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .rps-brand-accent {
@@ -35,6 +41,7 @@ color: magenta;
 /* 3. NAVIGATION LIST */
 .rps-nav-list {
   flex: 1;
+  padding: 10px 0;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #1a1a3c transparent;
@@ -63,6 +70,12 @@ color: magenta;
   box-shadow: 0 4px 15px rgba(78, 68, 255, 0.25);
 }
 
+/* --- Admin Active State --- */
+.rps-sidebar-root.admin-mode .rps-item-active {
+  background-color: #a855f7 !important; /* Purple for Admin Active */
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+}
+
 .rps-item-content {
   display: flex;
   align-items: center;
@@ -74,37 +87,47 @@ color: magenta;
   font-weight: 500;
 }
 
-.rps-item-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* 5. UI ELEMENTS */
-.rps-alert-badge {
-  background-color: #ff9f43;
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 11px;
-  font-weight: 900;
-}
-
-.rps-chevron-icon {
-  opacity: 0.4;
-}
-
-/* 6. FOOTER */
+/* 5. FOOTER & PROFILE */
 .rps-sidebar-footer {
   padding: 20px;
-  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.rps-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.rps-user-icon {
+    color: #888;
+}
+
+.rps-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.rps-user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.rps-user-role {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.rps-version-info {
   font-size: 12px;
   font-weight: 600;
-  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
 }
 
 .rps-v-text { color: #4e44ff; letter-spacing: 1px; }
