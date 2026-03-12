@@ -1,186 +1,209 @@
-:root {
-  --mt-dot-color: #cbd5e0;
-  --mt-green: #4ade80;
-  --mt-blue: #3b82f6;
-  --mt-dark: #2d3748;
-}
+/* ══════════════════════════════════════════════
+   My Tree — Network Visualization
+   ══════════════════════════════════════════════ */
 
-.MT_page_bg {
-  background-color: #f7f9fc;
-  padding: 40px 20px;
+.mt-page {
+  padding: 24px;
+  background: #f5f7fb;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
-.MT_card_container {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-  width: 100%;
-  max-width: 1200px;
-  padding: 30px;
-  /* Crucial for mobile scrolling */
+/* ── Loader ── */
+.mt-loader {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 50vh; gap: 14px; color: #64748b; font-size: 14px;
+}
+.mt-spinner {
+  width: 30px; height: 30px; border: 3px solid #e2e8f0;
+  border-top-color: #6366f1; border-radius: 50%;
+  animation: mtSpin 0.7s linear infinite;
+}
+@keyframes mtSpin { to { transform: rotate(360deg); } }
+
+/* ── Empty ── */
+.mt-empty {
+  text-align: center; padding: 60px 20px; color: #64748b;
+}
+.mt-empty__icon { font-size: 48px; margin-bottom: 12px; }
+.mt-empty h3 { font-size: 18px; color: #1e293b; margin: 0 0 8px; }
+.mt-empty p { font-size: 14px; margin: 0; }
+
+/* ── Header ── */
+.mt-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+}
+.mt-header__title { font-size: 24px; font-weight: 800; color: #1e293b; margin: 0; }
+.mt-header__sub { font-size: 13px; color: #94a3b8; margin: 4px 0 0; }
+.mt-header__stats { display: flex; gap: 12px; }
+.mt-stat {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 12px; padding: 12px 20px; text-align: center; color: #fff;
+  min-width: 80px;
+}
+.mt-stat__num { display: block; font-size: 22px; font-weight: 800; }
+.mt-stat__label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.85; font-weight: 600; }
+
+/* ── Card ── */
+.mt-card {
+  background: #fff; border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  overflow: hidden; margin-bottom: 16px;
+}
+.mt-card__hint {
+  display: none; /* shown on mobile */
+  padding: 10px 16px; background: #eef2ff;
+  font-size: 12px; color: #6366f1; font-weight: 500;
+  align-items: center; gap: 6px;
+}
+.mt-tree-scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  padding: 30px 20px 40px;
 }
-
-.MT_card_title {
-  color: #4a5568;
-  font-size: 1.1rem;
-  margin-bottom: 40px;
-  font-weight: 500;
-}
-
-.MT_tree_flow {
+.mt-tree-flow {
   display: flex;
-  /* 'safe' ensures that if the content overflows, it aligns to the start 
-     so it's not cut off on the left. */
   justify-content: safe center;
-  /* Ensures the container expands to fit the full width of the tree */
   min-width: max-content;
-  padding: 20px;
 }
-
-/* Fallback for browsers that don't support 'safe center' yet */
 @supports not (justify-content: safe center) {
-  .MT_tree_flow {
-    justify-content: center;
-  }
+  .mt-tree-flow { justify-content: center; }
 }
 
-/* Base Node Positioning */
-.MT_node_branch {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ── Tree Structure ── */
+.mt-branch {
+  display: flex; flex-direction: column; align-items: center;
+  position: relative; padding: 0 12px;
+}
+
+.mt-children {
+  display: flex; position: relative;
+  padding-top: 50px; margin-top: 12px;
+}
+
+/* Vertical stem from parent */
+.mt-children::before {
+  content: ''; position: absolute; top: -8px; left: 50%;
+  height: 44px; border-left: 2px solid #e2e8f0;
+}
+
+/* Horizontal connector between siblings */
+.mt-branch:not(:only-child)::after {
+  content: ''; position: absolute; top: -8px; width: 100%;
+  border-top: 2px solid #e2e8f0;
+}
+.mt-branch:first-child::after { left: 50%; width: 50%; }
+.mt-branch:last-child::after { right: 50%; width: 50%; }
+.mt-branch:only-child::after { display: none; }
+
+/* Arrow */
+.mt-branch:not(.mt-branch--root)::before {
+  content: ''; position: absolute; top: 14px;
+  left: calc(50% - 4px); width: 0; height: 0;
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+  border-top: 6px solid #cbd5e1; z-index: 10;
+}
+
+/* ── Node Card ── */
+.mt-node {
+  z-index: 20; display: flex; flex-direction: column;
+  align-items: center; width: 100px;
+}
+
+.mt-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; transition: transform 0.2s;
+}
+.mt-avatar:hover { transform: scale(1.08); }
+
+.mt-avatar__text {
+  font-size: 16px; font-weight: 700; color: #fff; z-index: 2;
   position: relative;
-  padding: 0 10px;
 }
 
-/* THE FIRST PARENT LINE / STEM */
-.MT_children_wrapper {
-  display: flex;
-  position: relative;
-  padding-top: 60px;
-  margin-top: 15px;
+/* Status variants */
+.mt-avatar--root {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+}
+.mt-avatar--active,
+.mt-avatar--filled {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  box-shadow: 0 4px 12px rgba(30, 41, 59, 0.25);
+  border: 2px solid #4ade80;
+}
+.mt-avatar--empty {
+  background: #e2e8f0;
+  border: 2px dashed #cbd5e1;
+}
+.mt-avatar--empty .mt-avatar__text { color: #94a3b8; font-size: 20px; }
+
+/* Root ring pulse */
+.mt-avatar__ring {
+  position: absolute; inset: -6px; border-radius: 50%;
+  border: 2px solid rgba(99, 102, 241, 0.3);
+  animation: mtRing 2s ease-in-out infinite;
+}
+@keyframes mtRing {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
 }
 
-.MT_children_wrapper::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  height: 50px;
-  border-left: 1.5px dotted var(--mt-dot-color);
+/* Node info */
+.mt-node__info {
+  display: flex; flex-direction: column; align-items: center;
+  margin-top: 8px; gap: 3px;
+}
+.mt-node__name {
+  font-size: 12px; font-weight: 600; color: #334155;
+  text-align: center; word-break: break-word; max-width: 100px;
 }
 
-/* Horizontal line connecting siblings */
-.MT_node_branch:not(:only-child)::after {
-  content: "";
-  position: absolute;
-  top: -10px;
-  width: 100%;
-  border-top: 1.5px dotted var(--mt-dot-color);
+/* Badges */
+.mt-badge {
+  font-size: 9px; font-weight: 700; padding: 2px 8px;
+  border-radius: 8px; letter-spacing: 0.3px;
 }
+.mt-badge--left { background: #dbeafe; color: #2563eb; }
+.mt-badge--right { background: #fce7f3; color: #db2777; }
 
-.MT_node_branch:first-child::after {
-  left: 50%;
-  width: 50%;
+/* ── Legend ── */
+.mt-legend {
+  display: flex; gap: 20px; justify-content: center;
+  flex-wrap: wrap; color: #64748b; font-size: 12px;
 }
-.MT_node_branch:last-child::after {
-  right: 50%;
-  width: 50%;
+.mt-legend__item { display: flex; align-items: center; gap: 6px; }
+.mt-legend__dot {
+  width: 12px; height: 12px; border-radius: 50%;
 }
-.MT_node_branch:only-child::after {
-  display: none;
-}
+.mt-legend__dot--root { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.mt-legend__dot--active { background: #1e293b; border: 2px solid #4ade80; box-sizing: border-box; }
+.mt-legend__dot--empty { background: #e2e8f0; border: 2px dashed #cbd5e1; box-sizing: border-box; }
 
-/* ARROW HEADS */
-.MT_node_branch:not(.MT_is_root)::before {
-  content: "";
-  position: absolute;
-  top: 15px;
-  left: calc(50% - 4px);
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 7px solid var(--mt-dot-color);
-  z-index: 10;
-}
-
-/* Node UI Styling */
-.MT_node_item {
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 110px;
-}
-
-.MT_avatar_outer {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 3px solid transparent;
-  background: #fff;
-}
-
-.MT_avatar_inner {
-  width: 52px;
-  height: 52px;
-  background: var(--mt-dark);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.MT_avatar_inner svg {
-  width: 22px;
-  opacity: 0.9;
-}
-
-/* Status Logic */
-.MT_avatar_outer.root {
-  border-color: var(--mt-green);
-}
-.MT_avatar_outer.root .MT_avatar_inner {
-  background: var(--mt-blue);
-}
-.MT_avatar_outer.active {
-  border-color: var(--mt-green);
-}
-.MT_avatar_outer.filled {
-  border-color: var(--mt-dark);
-}
-.MT_avatar_outer.empty {
-  border-color: #e2e8f0;
-}
-.MT_avatar_outer.empty .MT_avatar_inner {
-  background: #cbd5e0;
-}
-
-.MT_node_name {
-  margin-top: 10px;
-  font-size: 0.85rem;
-  color: #64748b;
-  font-weight: 500;
-  text-align: center;
-}
-
-/* Responsiveness adjustments */
+/* ── Responsive ── */
 @media (max-width: 768px) {
-  .MT_card_container {
-    padding: 15px; /* More space for the tree on small screens */
-  }
-  .MT_node_branch {
-    padding: 0 5px; /* Tighten spacing slightly */
-  }
+  .mt-page { padding: 16px; }
+  .mt-header__title { font-size: 20px; }
+  .mt-card__hint { display: flex; }
+  .mt-tree-scroll { padding: 20px 12px 30px; }
+  .mt-branch { padding: 0 6px; }
+  .mt-avatar { width: 44px; height: 44px; }
+  .mt-avatar__text { font-size: 13px; }
+  .mt-node { width: 80px; }
+  .mt-node__name { font-size: 10px; }
+  .mt-badge { font-size: 8px; }
+  .mt-stat { padding: 10px 14px; }
+  .mt-stat__num { font-size: 18px; }
+}
+
+@media (max-width: 480px) {
+  .mt-branch { padding: 0 4px; }
+  .mt-avatar { width: 36px; height: 36px; }
+  .mt-avatar__text { font-size: 11px; }
+  .mt-node { width: 65px; }
+  .mt-node__name { font-size: 9px; }
+  .mt-children { padding-top: 36px; margin-top: 8px; }
+  .mt-children::before { height: 32px; }
 }

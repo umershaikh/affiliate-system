@@ -1,105 +1,337 @@
-.db-nav-wrapper {
-  --db-main-bg: #071251;
-  --db-input-bg: rgba(255, 255, 255, 0.08);
-  --db-accent: #4634ff;
-  --db-danger: #eb4444;
-  
-  background-color: var(--db-main-bg);
+/* ══════════════════════════════════════════════
+   Dashboard Navbar — Clean, Minimal Design
+   ══════════════════════════════════════════════ */
+
+.dnav {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  height: 60px;
-  color: #ffffff;
+  padding: 0 24px;
+  height: 64px;
+  color: #fff;
   position: relative;
   z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s;
 }
 
-/* Left Section */
-.db-nav-left { display: flex; align-items: center; gap: 20px; }
+/* Admin Mode */
+.dnav--admin {
+  background: linear-gradient(135deg, #0c0f1a 0%, #1a1035 100%);
+  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.08);
+}
 
-/* ANIMATED TOGGLE BUTTON */
-.db-nav-res-btn {
+.dnav--admin .dnav__avatar {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+}
+
+/* Admin Badge */
+.dnav__admin-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 12px;
+  padding: 4px 12px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #a78bfa;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ── Left: Hamburger ── */
+.dnav__left {
+  display: flex;
+  align-items: center;
+}
+
+.dnav__hamburger {
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 5px;
-  width: 35px;
-  height: 35px;
-  padding: 0;
-  z-index: 1100;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.2s;
 }
 
-.db-nav-res-btn .line {
+.dnav__hamburger:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dnav__hamburger span {
   display: block;
-  width: 22px;
+  width: 20px;
   height: 2px;
-  background-color: white;
+  background: #94a3b8;
   border-radius: 2px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease;
 }
 
-/* Animation to Cross */
-.db-nav-res-btn.active .line:nth-child(1) {
+.dnav__hamburger--open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
+  background: #fff;
 }
-.db-nav-res-btn.active .line:nth-child(2) {
+.dnav__hamburger--open span:nth-child(2) {
   opacity: 0;
-  transform: translateX(-10px);
+  transform: translateX(-8px);
 }
-.db-nav-res-btn.active .line:nth-child(3) {
+.dnav__hamburger--open span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
+  background: #fff;
 }
 
-/* Rest of your existing CSS */
-.db-nav-search-form { position: relative; }
-.db-nav-search-input {
-  background: var(--db-input-bg);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  padding: 7px 12px 7px 35px;
-  color: white;
-  width: 220px;
-  font-size: 14px;
+/* ── Right Section ── */
+.dnav__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
 }
-.db-nav-search-icon {
+
+/* ── Action Buttons Group ── */
+.dnav__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dnav__action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #fff;
+}
+
+.dnav__action-btn span {
+  line-height: 1;
+}
+
+/* Deposit — green */
+.dnav__action-btn--deposit {
+  background: linear-gradient(135deg, #059669, #10b981);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.25);
+}
+.dnav__action-btn--deposit:hover {
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Withdraw — blue/indigo */
+.dnav__action-btn--withdraw {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+}
+.dnav__action-btn--withdraw:hover {
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Divider between actions & profile */
+.dnav__right::before {
+  content: '';
+  display: none;
+}
+
+/* ── Profile Button ── */
+.dnav__profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 5px 12px 5px 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: 4px;
+}
+
+.dnav__profile-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.dnav__avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.dnav__user-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.3;
+}
+
+.dnav__username {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.dnav__role {
+  font-size: 10px;
+  color: #64748b;
+  text-transform: capitalize;
+}
+
+.dnav__chevron {
+  color: #64748b;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.dnav__chevron--open {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown ── */
+.dnav__dropdown {
   position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888fb3;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 240px;
+  background: #fff;
+  color: #334155;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  animation: dnavSlideIn 0.2s ease-out;
+  overflow: hidden;
+  z-index: 2000;
 }
 
-/* Right Section Actions */
-.db-nav-action-list { display: flex; align-items: center; list-style: none; gap: 8px; margin: 0; }
-.db-nav-icon-btn {
-  background: none; border: none; color: white; font-size: 18px;
-  padding: 8px; cursor: pointer; position: relative; border-radius: 50%;
-}
-.db-nav-badge {
-  position: absolute; top: 2px; right: 2px; background: var(--db-danger);
-  font-size: 9px; padding: 2px 4px; border-radius: 10px; line-height: 1;
+@keyframes dnavSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Dropdowns & Profile Styles (Same as before) */
-.db-nav-profile-trigger { display: flex; align-items: center; gap: 10px; background: none; border: none; color: white; cursor: pointer; }
-.db-nav-avatar { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; border: 2px solid var(--db-accent); }
-.db-nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.db-nav-dropdown-rel { position: relative; }
-.db-nav-dropdown-menu {
-  position: absolute; right: 0; top: 120%; background: white; color: #333;
-  border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: dbNavFadeIn 0.2s ease-out;
+.dnav__dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: #f8fafc;
 }
-@keyframes dbNavFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-@media (max-width: 1024px) {
-  .db-nav-search-form, .db-nav-username { display: none; }
+.dnav__dropdown-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.dnav__dropdown-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.dnav__dropdown-email {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.dnav__dropdown-divider {
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.dnav__dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+}
+
+.dnav__dropdown-item:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.dnav__dropdown-item svg {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.dnav__dropdown-item:hover svg {
+  color: #6366f1;
+}
+
+.dnav__dropdown-item--danger {
+  color: #ef4444;
+}
+
+.dnav__dropdown-item--danger:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.dnav__dropdown-item--danger svg {
+  color: #fca5a5;
+}
+
+.dnav__dropdown-item--danger:hover svg {
+  color: #ef4444;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .dnav { padding: 0 12px; }
+  .dnav__user-info { display: none; }
+  .dnav__profile-btn { padding: 4px 8px 4px 4px; }
+  .dnav__action-btn span { display: none; }
+  .dnav__action-btn { padding: 8px 10px; border-radius: 8px; }
+  .dnav__actions { gap: 6px; }
 }
 
 @media (min-width: 1025px) {
-  .db-nav-res-btn { display: none; }
+  .dnav__hamburger {
+    display: none;
+  }
 }

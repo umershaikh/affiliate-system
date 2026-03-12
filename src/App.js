@@ -8,6 +8,9 @@ import {
   Navigate,
 } from "react-router-dom";
 
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
 import Faq from "./Pages/Faq/Faq";
@@ -22,7 +25,6 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 function AppContent() {
   const location = useLocation();
 
-  // FIX: Check if the path STARTS with /dashboard or is exactly /login
   const isNoLayoutPage = 
     location.pathname.startsWith("/dashboard") || 
     location.pathname === "/login";
@@ -42,8 +44,12 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<LoginPage />} />
           
-          {/* FIX: Added /* to allow the Dashboard's internal Routes to work */}
-          <Route path="/dashboard/*" element={<Dashboard />} />
+          {/* Protected dashboard routes */}
+          <Route path="/dashboard/*" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -56,8 +62,10 @@ function AppContent() {
 
 export default function AppWrapper() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </AuthProvider>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -7,51 +8,48 @@ const LoginPage = () => {
   const [status, setStatus] = useState({ loading: false, error: '' });
   
   const navigate = useNavigate();
+  const { login, isAuthenticated, isAdmin } = useAuth();
 
-  // Simple Credentials and Route Mapping
-  const USERS = {
-    admin: {
-      username: "admin",
-      password: "123", // Simple password
-      route: "/dashboard/admin/withdrawals-pending"
-    },
-    user: {
-      username: "user",
-      password: "123", // Simple password
-      route: "/dashboard"
+  // If already logged in, redirect
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      navigate(isAdmin ? '/dashboard/admin/overview' : '/dashboard', { replace: true });
     }
-  };
+  }, [isAuthenticated, isAdmin, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setStatus({ loading: true, error: '' });
 
-    // Simulate API delay
-    setTimeout(() => {
-      let authenticatedUser = null;
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
 
-      // Check credentials
-      if (credentials.username === USERS.admin.username && credentials.password === USERS.admin.password) {
-        authenticatedUser = USERS.admin;
-      } else if (credentials.username === USERS.user.username && credentials.password === USERS.user.password) {
-        authenticatedUser = USERS.user;
-      }
+      const data = await response.json();
 
-      if (authenticatedUser) {
-        // Navigate based on role
-        navigate(authenticatedUser.route); 
+      if (data.success) {
+        login(data.token, data.user);
+        navigate(data.route);
       } else {
         setStatus({ 
           loading: false, 
-          error: 'Access Denied. Please check your credentials.' 
+          error: data.message || 'Access Denied. Please check your credentials.' 
         });
       }
-    }, 1200);
+    } catch (err) {
+      setStatus({ 
+        loading: false, 
+        error: 'Server error. Please try again later.' 
+      });
+    }
   };
 
   return (

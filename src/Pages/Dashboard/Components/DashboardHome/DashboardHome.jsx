@@ -1,110 +1,151 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import apiFetch from '../../../../utils/api';
+import { useAuth } from '../../../../context/AuthContext';
 import './DashboardHome.css';
 
 const DashboardHome = () => {
-  const userStats = [
-    { label: 'Total Users', value: '3373', variant: 'blue' },
-    { label: 'Active Users', value: '3373', variant: 'green' },
-    { label: 'Email Unverified Users', value: '0', variant: 'red' },
-    { label: 'Mobile Unverified Users', value: '0', variant: 'orange' },
-  ];
+  const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    apiFetch('/api/dashboard/stats')
+      .then(res => res.json())
+      .then(data => {
+        setStats(data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <div className="dbh-container"><p>Loading...</p></div>;
+  }
+
+  if (!stats) {
+    return <div className="dbh-container"><p>Failed to load dashboard data.</p></div>;
+  }
 
   return (
     <div className="dbh-container">
       <header className="dbh-header">
-        <h1 className="dbh-header__title">Dashboard</h1>
-        <button className="dbh-header__btn">Cron Setup</button>
+        <h1 className="dbh-header__title">Welcome, {user?.username || 'User'}!</h1>
+        <span className="dbh-header__badge">Member since {stats.joinDate}</span>
       </header>
 
-      {/* Row 1: Users */}
+      {/* Available Balance Card */}
+      <section className="dbh-balance-hero">
+        <div className="dbh-balance-hero__left">
+          <span className="dbh-balance-hero__label">Available Balance</span>
+          <h2 className="dbh-balance-hero__amount">Rs. {stats.availableBalance.toFixed(2)}</h2>
+          <span className="dbh-balance-hero__sub">
+            Pending withdrawals: Rs. {(stats.withdrawals.pending || 0).toFixed(2)}
+          </span>
+        </div>
+        <div className="dbh-balance-hero__icon">💰</div>
+      </section>
+
+      {/* Row 1: Team / Referrals */}
       <section className="dbh-grid-quad">
-        {userStats.map((stat, idx) => (
-          <div key={idx} className={`dbh-stat-card dbh-stat-card--${stat.variant}`}>
-            <div className="dbh-stat-card__body">
-              <div className="dbh-stat-card__icon">👥</div>
-              <div>
-                <span className="dbh-stat-card__label">{stat.label}</span>
-                <h2 className="dbh-stat-card__value">{stat.value}</h2>
-              </div>
+        <div className="dbh-stat-card dbh-stat-card--blue">
+          <div className="dbh-stat-card__body">
+            <div className="dbh-stat-card__icon">👥</div>
+            <div>
+              <span className="dbh-stat-card__label">Direct Referrals</span>
+              <h2 className="dbh-stat-card__value">{stats.team.directReferrals}</h2>
             </div>
-            <span className="dbh-stat-card__arrow">❯</span>
           </div>
-        ))}
+        </div>
+        <div className="dbh-stat-card dbh-stat-card--green">
+          <div className="dbh-stat-card__body">
+            <div className="dbh-stat-card__icon">🌳</div>
+            <div>
+              <span className="dbh-stat-card__label">Total Team Size</span>
+              <h2 className="dbh-stat-card__value">{stats.team.totalTeamSize}</h2>
+            </div>
+          </div>
+        </div>
+        <div className="dbh-stat-card dbh-stat-card--orange">
+          <div className="dbh-stat-card__body">
+            <div className="dbh-stat-card__icon">🔑</div>
+            <div>
+              <span className="dbh-stat-card__label">Pins Available</span>
+              <h2 className="dbh-stat-card__value">{stats.pins.available}</h2>
+            </div>
+          </div>
+        </div>
+        <div className="dbh-stat-card dbh-stat-card--red">
+          <div className="dbh-stat-card__body">
+            <div className="dbh-stat-card__icon">🎫</div>
+            <div>
+              <span className="dbh-stat-card__label">Pins Used</span>
+              <h2 className="dbh-stat-card__value">{stats.pins.used}</h2>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Row 2: Deposits & Withdrawals */}
       <section className="dbh-grid-dual">
         <div className="dbh-panel">
-          <h3 className="dbh-panel__title">Deposits</h3>
+          <h3 className="dbh-panel__title">My Deposits</h3>
           <div className="dbh-panel__inner-grid">
             <div className="dbh-mini-card dbh-mini--green">
-              <div><h4 className="dbh-mini-val">$74,805.00</h4><p className="dbh-mini-label">Total Deposited</p></div>
+              <div><h4 className="dbh-mini-val">Rs. {stats.deposits.total.toFixed(2)}</h4><p className="dbh-mini-label">Total Deposited</p></div>
               <span className="dbh-mini-arrow">❯</span>
             </div>
             <div className="dbh-mini-card dbh-mini--orange">
-              <div><h4 className="dbh-mini-val">95</h4><p className="dbh-mini-label">Pending Deposits</p></div>
+              <div><h4 className="dbh-mini-val">{stats.deposits.pendingCount}</h4><p className="dbh-mini-label">Pending</p></div>
+              <span className="dbh-mini-arrow">❯</span>
+            </div>
+            <div className="dbh-mini-card dbh-mini--blue">
+              <div><h4 className="dbh-mini-val">{stats.deposits.approvedCount}</h4><p className="dbh-mini-label">Approved</p></div>
               <span className="dbh-mini-arrow">❯</span>
             </div>
             <div className="dbh-mini-card dbh-mini--red">
-              <div><h4 className="dbh-mini-val">0</h4><p className="dbh-mini-label">Rejected Deposits</p></div>
-              <span className="dbh-mini-arrow">❯</span>
-            </div>
-            <div className="dbh-mini-card dbh-mini--purple">
-              <div><h4 className="dbh-mini-val">$823.05</h4><p className="dbh-mini-label">Deposited Charge</p></div>
+              <div><h4 className="dbh-mini-val">{stats.deposits.rejectedCount}</h4><p className="dbh-mini-label">Rejected</p></div>
               <span className="dbh-mini-arrow">❯</span>
             </div>
           </div>
         </div>
 
         <div className="dbh-panel">
-          <h3 className="dbh-panel__title">Withdrawals</h3>
+          <h3 className="dbh-panel__title">My Withdrawals</h3>
           <div className="dbh-panel__inner-grid">
             <div className="dbh-mini-card dbh-mini--green">
-              <div><h4 className="dbh-mini-val">$110.00</h4><p className="dbh-mini-label">Total Withdrawn</p></div>
+              <div><h4 className="dbh-mini-val">Rs. {stats.withdrawals.total.toFixed(2)}</h4><p className="dbh-mini-label">Total Withdrawn</p></div>
               <span className="dbh-mini-arrow">❯</span>
             </div>
             <div className="dbh-mini-card dbh-mini--orange">
-              <div><h4 className="dbh-mini-val">40</h4><p className="dbh-mini-label">Pending Withdrawals</p></div>
+              <div><h4 className="dbh-mini-val">{stats.withdrawals.pendingCount}</h4><p className="dbh-mini-label">Pending</p></div>
+              <span className="dbh-mini-arrow">❯</span>
+            </div>
+            <div className="dbh-mini-card dbh-mini--blue">
+              <div><h4 className="dbh-mini-val">{stats.withdrawals.approvedCount}</h4><p className="dbh-mini-label">Approved</p></div>
               <span className="dbh-mini-arrow">❯</span>
             </div>
             <div className="dbh-mini-card dbh-mini--red">
-              <div><h4 className="dbh-mini-val">1</h4><p className="dbh-mini-label">Rejected Withdrawals</p></div>
-              <span className="dbh-mini-arrow">❯</span>
-            </div>
-            <div className="dbh-mini-card dbh-mini--purple">
-              <div><h4 className="dbh-mini-val">$4.20</h4><p className="dbh-mini-label">Withdrawal Charge</p></div>
+              <div><h4 className="dbh-mini-val">{stats.withdrawals.rejectedCount}</h4><p className="dbh-mini-label">Rejected</p></div>
               <span className="dbh-mini-arrow">❯</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Row 3: Commissions */}
+      {/* Row 3: Quick Summary */}
       <section className="dbh-grid-quad">
         <div className="dbh-promo-card dbh-p-purple">
-          <p>Total Invest</p><h3>$98,669.00 USD</h3>
+          <p>Approved Deposits</p><h3>Rs. {stats.deposits.approved.toFixed(2)}</h3>
         </div>
         <div className="dbh-promo-card dbh-p-blue">
-          <p>Last 7 Days Invest</p><h3>$0.00 USD</h3>
+          <p>Approved Withdrawals</p><h3>Rs. {stats.withdrawals.approved.toFixed(2)}</h3>
         </div>
         <div className="dbh-promo-card dbh-p-indigo">
-          <p>Total Referral Commission</p><h3>$1,086.00 USD</h3>
+          <p>Direct Referrals</p><h3>{stats.team.directReferrals}</h3>
         </div>
         <div className="dbh-promo-card dbh-p-teal">
-          <p>Total Binary Commission</p><h3>$2,760.13 USD</h3>
+          <p>Total Team</p><h3>{stats.team.totalTeamSize}</h3>
         </div>
-      </section>
-
-      {/* Row 4: BV Cut */}
-      <section className="dbh-grid-quad">
-        {['0', '14193', '12256', '1937'].map((val, idx) => (
-          <div key={idx} className="dbh-bv-card">
-            <div className="dbh-bv-info">
-              <p>Users Total BV Cut</p><h3>{val}</h3>
-            </div>
-            <div className="dbh-bv-icon">⚙</div>
-          </div>
-        ))}
       </section>
     </div>
   );

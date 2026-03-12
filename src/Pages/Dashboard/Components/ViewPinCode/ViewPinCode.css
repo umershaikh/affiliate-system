@@ -1,83 +1,99 @@
-/* Container padding for responsiveness */
-.vpc-container {
-  padding: 20px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f8f9fa; /* Subtle light background */
-  min-height: 100vh;
+/* ══════════════════════════════════════════════
+   View Pin Codes — Card Grid Design
+   ══════════════════════════════════════════════ */
+
+.vp-page {
+  padding: 24px; background: #f5f7fb; min-height: 100vh;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 
-/* Breadcrumb Styling */
-.vpc-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #6c757d;
-  margin-bottom: 8px;
+.vp-loader {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 50vh; gap: 14px; color: #64748b; font-size: 14px;
+}
+.vp-spinner {
+  width: 30px; height: 30px; border: 3px solid #e2e8f0;
+  border-top-color: #6366f1; border-radius: 50%;
+  animation: vpSpin 0.7s linear infinite;
+}
+@keyframes vpSpin { to { transform: rotate(360deg); } }
+
+/* Header */
+.vp-header { margin-bottom: 20px; }
+.vp-header__title { font-size: 24px; font-weight: 800; color: #1e293b; margin: 0; }
+.vp-header__sub { font-size: 13px; color: #94a3b8; margin: 4px 0 0; }
+
+/* Stats */
+.vp-stats { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+.vp-stat {
+  padding: 14px 20px; border-radius: 12px; text-align: center;
+  min-width: 100px; color: #fff;
+}
+.vp-stat--total { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.vp-stat--avail { background: linear-gradient(135deg, #10b981, #059669); }
+.vp-stat--used { background: linear-gradient(135deg, #64748b, #475569); }
+.vp-stat__num { display: block; font-size: 24px; font-weight: 800; }
+.vp-stat__label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.85; font-weight: 600; }
+
+/* Empty */
+.vp-empty { text-align: center; padding: 60px 20px; color: #64748b; }
+.vp-empty__icon { font-size: 48px; margin-bottom: 12px; }
+.vp-empty h3 { font-size: 18px; color: #1e293b; margin: 0 0 8px; }
+.vp-empty p { font-size: 14px; margin: 0; max-width: 400px; margin: 0 auto; }
+
+/* Sections */
+.vp-section { margin-bottom: 24px; }
+.vp-section__title { font-size: 15px; font-weight: 700; color: #1e293b; margin: 0 0 12px; }
+
+/* Grid */
+.vp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+
+/* Cards */
+.vp-card {
+  background: #fff; border-radius: 14px; padding: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.04);
+  position: relative; transition: transform 0.15s;
+}
+.vp-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+
+.vp-card--avail { border-left: 4px solid #10b981; }
+.vp-card--used { border-left: 4px solid #94a3b8; opacity: 0.75; }
+
+.vp-card__badge {
+  display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; padding: 3px 10px; border-radius: 6px;
+  background: #d1fae5; color: #059669; margin-bottom: 12px;
+}
+.vp-card__badge--used { background: #f1f5f9; color: #64748b; }
+
+.vp-card__code {
+  display: block; font-size: 16px; font-weight: 700; color: #1e293b;
+  background: #f8fafc; padding: 10px 14px; border-radius: 8px;
+  font-family: 'SF Mono', 'Fira Code', monospace; letter-spacing: 1px;
+  margin-bottom: 10px; word-break: break-all;
 }
 
-.vpc-home-icon {
-  font-size: 14px;
+.vp-card__copy {
+  width: 100%; padding: 8px; border: 1px solid #e2e8f0; border-radius: 8px;
+  background: #fff; color: #6366f1; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s;
+}
+.vp-card__copy:hover { background: #eef2ff; border-color: #6366f1; }
+.vp-card__copy--done { background: #d1fae5; color: #059669; border-color: #10b981; }
+
+.vp-card__meta {
+  font-size: 11px; color: #94a3b8; margin-top: 10px; text-align: center;
 }
 
-.vpc-separator {
-  color: #adb5bd;
+.vp-card__used-info {
+  display: flex; flex-direction: column; gap: 2px;
+  font-size: 12px; color: #64748b; margin-top: 8px;
 }
+.vp-card__date { font-size: 11px; color: #94a3b8; }
 
-/* Page Title Styling */
-.vpc-page-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: #343a40;
-  margin-bottom: 24px;
-}
-
-/* Card Styling */
-.vpc-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  width: 100%;
-  max-width: 1400px; /* Optional: constrains width on ultra-wide screens */
-  margin: 0 auto;
-}
-
-/* Card Header (The Blue Bar) */
-.vpc-card-header {
-  background: linear-gradient(90deg, #328df2 0%, #4a9ff5 100%);
-  color: #ffffff;
-  padding: 16px 20px;
-  font-size: 15px;
-  font-weight: 500;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Card Body */
-.vpc-card-body {
-  padding: 30px; /* Tall padding to match the "empty" look */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* min-height: 150px; */
-}
-
-.vpc-no-data {
-  color: #495057;
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0;
-}
-
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
-  .vpc-container {
-    padding: 15px;
-  }
-  
-  .vpc-card-header {
-    padding: 12px 15px;
-    font-size: 14px;
-  }
+  .vp-page { padding: 16px; }
+  .vp-grid { grid-template-columns: 1fr; }
+  .vp-header__title { font-size: 20px; }
 }

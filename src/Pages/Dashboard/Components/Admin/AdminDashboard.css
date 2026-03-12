@@ -1,0 +1,156 @@
+/* ══════════════════════════════════════════════
+   Admin Dashboard — Professional Overview
+   ══════════════════════════════════════════════ */
+
+.adm-dash {
+  padding: 24px;
+  background: #f5f7fb;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+/* ── Loader ── */
+.adm-dash__loader {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 60vh; gap: 16px; color: #64748b; font-size: 14px;
+}
+.adm-dash__spinner {
+  width: 32px; height: 32px; border: 3px solid #e2e8f0;
+  border-top-color: #6366f1; border-radius: 50%;
+  animation: adSpin 0.7s linear infinite;
+}
+@keyframes adSpin { to { transform: rotate(360deg); } }
+.adm-dash__error { text-align: center; padding: 80px 20px; color: #ef4444; font-size: 15px; }
+
+/* ── Header ── */
+.adm-dash__header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+}
+.adm-dash__title { font-size: 26px; font-weight: 800; color: #1e293b; margin: 0; }
+.adm-dash__subtitle { font-size: 13px; color: #94a3b8; margin: 4px 0 0; }
+.adm-dash__header-right {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: #64748b; font-weight: 500;
+}
+.adm-dash__live-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
+  animation: adPulse 2s ease-in-out infinite;
+}
+@keyframes adPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ── KPI Row ── */
+.adm-dash__kpi-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-bottom: 20px;
+}
+
+.adm-kpi {
+  background: #fff; border-radius: 14px; padding: 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex; align-items: center; gap: 14px;
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.04);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.adm-kpi:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+.adm-kpi::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 4px; border-radius: 0 4px 4px 0;
+}
+.adm-kpi--purple::before { background: linear-gradient(180deg, #8b5cf6, #6366f1); }
+.adm-kpi--green::before { background: linear-gradient(180deg, #22c55e, #10b981); }
+.adm-kpi--blue::before { background: linear-gradient(180deg, #3b82f6, #6366f1); }
+.adm-kpi--teal::before { background: linear-gradient(180deg, #14b8a6, #0d9488); }
+
+.adm-kpi__icon { font-size: 28px; flex-shrink: 0; }
+.adm-kpi__data { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.adm-kpi__value {
+  font-size: 20px; font-weight: 800; color: #1e293b;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.adm-kpi__label { font-size: 11px; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+.adm-kpi__badge {
+  position: absolute; top: 12px; right: 14px;
+  font-size: 10px; font-weight: 700; color: #64748b;
+  background: #f1f5f9; padding: 2px 8px; border-radius: 6px;
+}
+
+/* ── Panels Row ── */
+.adm-dash__panels {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 16px;
+}
+
+.adm-panel {
+  background: #fff; border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+.adm-panel__head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 20px; border-bottom: 1px solid #f1f5f9;
+}
+.adm-panel__head h3 { margin: 0; font-size: 15px; font-weight: 700; color: #1e293b; }
+.adm-panel__link {
+  background: none; border: none; color: #6366f1; font-size: 12px;
+  font-weight: 600; cursor: pointer; padding: 4px 8px; border-radius: 6px;
+  transition: background 0.15s;
+}
+.adm-panel__link:hover { background: #eef2ff; }
+
+/* Metrics inside panel */
+.adm-panel__metrics { padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+
+.adm-metric { display: flex; align-items: center; gap: 12px; }
+.adm-metric__bar { width: 4px; height: 36px; border-radius: 4px; }
+.adm-metric__bar--green { background: #22c55e; }
+.adm-metric__bar--amber { background: #f59e0b; }
+.adm-metric__bar--red { background: #ef4444; }
+.adm-metric__info { display: flex; flex-direction: column; }
+.adm-metric__label { font-size: 12px; color: #94a3b8; font-weight: 500; }
+.adm-metric__val { font-size: 16px; font-weight: 700; color: #1e293b; }
+
+/* Pin Row */
+.adm-dash__pin-row { display: flex; gap: 12px; padding: 16px 20px; }
+.adm-dash__pin-card {
+  flex: 1; padding: 20px; border-radius: 10px; text-align: center;
+}
+.adm-dash__pin-card--avail { background: linear-gradient(135deg, #ecfdf5, #d1fae5); }
+.adm-dash__pin-card--pending { background: linear-gradient(135deg, #fffbeb, #fef3c7); }
+.adm-dash__pin-num { display: block; font-size: 28px; font-weight: 800; color: #1e293b; }
+.adm-dash__pin-label { font-size: 11px; color: #64748b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Quick Actions */
+.adm-dash__actions { padding: 12px 16px; display: flex; flex-direction: column; gap: 6px; }
+.adm-action {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border: none; background: #f8fafc;
+  border-radius: 10px; cursor: pointer; font-size: 13px;
+  font-weight: 500; color: #334155; text-align: left;
+  transition: background 0.15s;
+  width: 100%;
+}
+.adm-action:hover { background: #eef2ff; }
+.adm-action__icon { font-size: 18px; }
+.adm-action__count {
+  margin-left: auto; background: #ef4444; color: #fff;
+  font-size: 11px; font-weight: 700; padding: 2px 8px;
+  border-radius: 10px; min-width: 20px; text-align: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .adm-dash__kpi-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .adm-dash { padding: 16px; }
+  .adm-dash__kpi-row { grid-template-columns: 1fr; }
+  .adm-dash__panels { grid-template-columns: 1fr; }
+  .adm-dash__title { font-size: 22px; }
+  .adm-kpi__value { font-size: 18px; }
+}

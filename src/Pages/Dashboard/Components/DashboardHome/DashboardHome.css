@@ -12,6 +12,44 @@
   font-family: sans-serif;
 }
 
+/* ── Balance Hero Card ── */
+.dbh-balance-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(79, 70, 229, 0.25);
+}
+
+.dbh-balance-hero__label {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.85;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.dbh-balance-hero__amount {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 6px 0 4px;
+  letter-spacing: -0.5px;
+}
+
+.dbh-balance-hero__sub {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.dbh-balance-hero__icon {
+  font-size: 48px;
+  opacity: 0.3;
+}
+
 /* Header */
 .dbh-header {
   display: flex;

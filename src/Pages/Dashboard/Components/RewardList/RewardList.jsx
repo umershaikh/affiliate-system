@@ -1,67 +1,195 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import apiFetch from '../../../../utils/api';
 import './RewardList.css';
 
 const RewardList = () => {
-  // Array of data extracted from the provided image
-  const rewardItems = [
-    { team: "10/10", rank: "Level 1", reward: "1,000", status: "Non-active" },
-    { team: "25/25", rank: "Level 2", reward: "2,000", status: "Non-active" },
-    { team: "50/50", rank: "Level 3", reward: "3,000", status: "Non-active" },
-    { team: "100/100", rank: "Level 4", reward: "5,000", status: "Non-active" },
-    { team: "250/250", rank: "Level 5", reward: "10,000", status: "Non-active" },
-    { team: "500/500", rank: "Level 6", reward: "30,000", status: "Non-active" },
-    { team: "1000/1000", rank: "Level 7", reward: "50,000", status: "Non-active" },
-    { team: "2.5k / 2.5k", rank: "Level 8", reward: "125,000", status: "Non-active" },
-    { team: "5k / 5k", rank: "Level 9", reward: "250,000", status: "Non-active" },
-    { team: "10k / 10k", rank: "Level 10", reward: "500,000", status: "Non-active" },
-    { team: "20k / 20k", rank: "Level 11", reward: "800,000", status: "Non-active" },
-    { team: "35k / 35k", rank: "Level 12", reward: "1,000,000", status: "Non-active" },
-    { team: "50k / 50k", rank: "Level 13", reward: "1,500,000", status: "Non-active" },
-  ];
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [claimingId, setClaimingId] = useState(null);
+  const [claimMsg, setClaimMsg] = useState(null);
+
+  const fetchRewards = () => {
+    apiFetch('/api/rewards')
+      .then(res => res.json())
+      .then(d => { setData(d); setLoading(false); })
+      .catch(() => setLoading(false));
+  };
+  useEffect(fetchRewards, []);
+
+  const handleClaim = async (levelId) => {
+    setClaimingId(levelId);
+    setClaimMsg(null);
+    try {
+      const res = await apiFetch('/api/rewards/claim', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ rewardId: levelId }),
+      });
+      const d = await res.json();
+      setClaimMsg({ error: !d.success, text: d.message });
+      if (d.success) fetchRewards();
+    } catch {
+      setClaimMsg({ error: true, text: 'Server error.' });
+    }
+    setClaimingId(null);
+  };
+
+  if (loading) {
+    return (
+      <div className="rl-page">
+        <div className="rl-loader"><div className="rl-spinner" /><span>Loading rewards...</span></div>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return <div className="rl-page"><div className="rl-empty">Failed to load rewards.</div></div>;
+  }
+
+  const { levels, teamSize, pinsUsed, currentRank, nextLevel } = data;
 
   return (
-    <div className="rl-uniq-wrapper">
-      <div className="rl-uniq-breadcrumb">
-        <span>🏠</span> / Alpha Bonuses
+    <div className="rl-page">
+      {/* Header */}
+      <div className="rl-header">
+        <div>
+          <h1 className="rl-header__title">Alpha Bonuses</h1>
+          <p className="rl-header__sub">Build your team, unlock rewards, earn monthly salary</p>
+        </div>
       </div>
-      
-      <h1 className="rl-uniq-header-text">Alpha Bonuses</h1>
 
-      <div className="rl-uniq-reward-card">
-        <div className="rl-uniq-blue-banner">
-          Ranks & Rewards
+      {/* Guide */}
+      <div className="rl-guide">
+        <div className="rl-guide__icon">📖</div>
+        <div className="rl-guide__content">
+          <h3>How Rewards Work</h3>
+          <ol>
+            <li><strong>Build your team</strong> — Use E-Pins to add members to your binary tree</li>
+            <li><strong>Meet the requirement</strong> — Each level requires a certain number of team members</li>
+            <li><strong>Unlock the level</strong> — Click the "Unlock" button when you're eligible</li>
+            <li><strong>Earn monthly salary</strong> — Once claimed, the reward amount is deposited to your account <strong>every 30 days</strong> automatically</li>
+          </ol>
+          <p className="rl-guide__note">💡 You can claim multiple levels! Each claimed level pays its own monthly salary separately.</p>
         </div>
+      </div>
 
-        <div className="rl-uniq-responsive-table">
-          <table className="rl-uniq-table-main">
-            <thead>
-              <tr>
-                <th>Team <span className="rl-uniq-sort-symbol">⇅</span></th>
-                <th>Rank <span className="rl-uniq-sort-symbol">⇅</span></th>
-                <th>Reward <span className="rl-uniq-sort-symbol">⇅</span></th>
-                <th style={{ textAlign: 'right' }}>Status <span className="rl-uniq-sort-symbol">⇅</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              {rewardItems.map((item, idx) => (
-                <tr key={idx}>
-                  <td>{item.team}</td>
-                  <td>{item.rank}</td>
-                  <td>{item.reward}</td>
-                  <td style={{ textAlign: 'right' }}>
-                    <span className="rl-uniq-status-pill">{item.status}</span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      {/* Progress Hero */}
+      <div className="rl-hero">
+        <div className="rl-hero__rank">
+          <div className="rl-hero__rank-icon">🏆</div>
+          <div>
+            <div className="rl-hero__rank-label">Current Rank</div>
+            <div className="rl-hero__rank-name">{currentRank}</div>
+          </div>
         </div>
+        <div className="rl-hero__stats">
+          <div className="rl-hero__stat">
+            <span className="rl-hero__stat-num">{teamSize}</span>
+            <span className="rl-hero__stat-label">Team Members</span>
+          </div>
+          <div className="rl-hero__stat">
+            <span className="rl-hero__stat-num">{pinsUsed}</span>
+            <span className="rl-hero__stat-label">Pins Used</span>
+          </div>
+          <div className="rl-hero__stat">
+            <span className="rl-hero__stat-num">{levels.filter(l => l.claimed).length}</span>
+            <span className="rl-hero__stat-label">Levels Claimed</span>
+          </div>
+        </div>
+        {nextLevel && (
+          <div className="rl-hero__next">
+            <div className="rl-hero__next-text">
+              Next: <strong>{nextLevel.rank}</strong> — need {nextLevel.required} team members
+            </div>
+            <div className="rl-hero__bar-wrap">
+              <div
+                className="rl-hero__bar-fill"
+                style={{ width: `${Math.min((teamSize / nextLevel.required) * 100, 100)}%` }}
+              />
+            </div>
+            <div className="rl-hero__bar-label">
+              {teamSize} / {nextLevel.required} members
+            </div>
+          </div>
+        )}
+      </div>
 
-        <div className="rl-uniq-pagination-bar">
-          <button className="rl-uniq-page-circle">‹</button>
-          <button className="rl-uniq-page-circle rl-uniq-is-active">1</button>
-          <button className="rl-uniq-page-circle">2</button>
+      {/* Claim message */}
+      {claimMsg && (
+        <div className={`rl-claim-msg ${claimMsg.error ? 'rl-claim-msg--error' : 'rl-claim-msg--success'}`}>
+          {claimMsg.text}
         </div>
+      )}
+
+      {/* Level Cards */}
+      <div className="rl-levels">
+        {levels.map((level, i) => (
+          <div
+            key={level.id || i}
+            className={`rl-level ${level.claimed ? 'rl-level--claimed' : level.unlocked ? 'rl-level--unlocked' : 'rl-level--locked'}`}
+          >
+            <div className="rl-level__num">{i + 1}</div>
+            <div className="rl-level__body">
+              <div className="rl-level__top">
+                <h3 className="rl-level__rank">{level.rank}</h3>
+                {level.claimed ? (
+                  <span className="rl-level__badge rl-level__badge--claimed">✓ Claimed</span>
+                ) : level.canClaim ? (
+                  <button
+                    className="rl-level__unlock-btn"
+                    onClick={() => handleClaim(level.id)}
+                    disabled={claimingId === level.id}
+                  >
+                    {claimingId === level.id ? '⏳ Claiming...' : '🔓 Unlock'}
+                  </button>
+                ) : level.unlocked ? (
+                  <span className="rl-level__badge rl-level__badge--unlocked">✓ Eligible</span>
+                ) : (
+                  <span className="rl-level__badge rl-level__badge--locked">🔒 Locked</span>
+                )}
+              </div>
+              <div className="rl-level__details">
+                <div className="rl-level__detail">
+                  <span className="rl-level__detail-label">Team Required</span>
+                  <span className="rl-level__detail-value">{level.team}</span>
+                </div>
+                <div className="rl-level__detail">
+                  <span className="rl-level__detail-label">Monthly Salary</span>
+                  <span className="rl-level__detail-value rl-level__reward">Rs. {level.reward}</span>
+                </div>
+                {level.claimed && level.claimInfo && (
+                  <>
+                    <div className="rl-level__detail">
+                      <span className="rl-level__detail-label">Claimed On</span>
+                      <span className="rl-level__detail-value">{level.claimInfo.claimedAt}</span>
+                    </div>
+                    <div className="rl-level__detail">
+                      <span className="rl-level__detail-label">Next Payout</span>
+                      <span className="rl-level__detail-value">{level.claimInfo.nextPayout}</span>
+                    </div>
+                    <div className="rl-level__detail">
+                      <span className="rl-level__detail-label">Total Earned</span>
+                      <span className="rl-level__detail-value rl-level__reward">Rs. {level.claimInfo.totalEarned}</span>
+                    </div>
+                  </>
+                )}
+              </div>
+              {!level.unlocked && (
+                <div className="rl-level__progress">
+                  <div className="rl-level__progress-bar">
+                    <div
+                      className="rl-level__progress-fill"
+                      style={{ width: `${Math.min((teamSize / (level.required || 1)) * 100, 100)}%` }}
+                    />
+                  </div>
+                  <span className="rl-level__progress-text">
+                    {teamSize}/{level.required} members
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
