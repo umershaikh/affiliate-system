@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../../../utils/api';
+import { formatCurrencyPKR } from '../../../../utils/format';
 import './RewardList.css';
 
 const RewardList = () => {
@@ -54,7 +55,7 @@ const RewardList = () => {
       <div className="rl-header">
         <div>
           <h1 className="rl-header__title">Alpha Bonuses</h1>
-          <p className="rl-header__sub">Build your team, unlock rewards, earn monthly salary</p>
+          <p className="rl-header__sub">Build your team, unlock rewards, earn one-time bonuses</p>
         </div>
       </div>
 
@@ -67,9 +68,9 @@ const RewardList = () => {
             <li><strong>Build your team</strong> — Use E-Pins to add members to your binary tree</li>
             <li><strong>Meet the requirement</strong> — Each level requires a certain number of team members</li>
             <li><strong>Unlock the level</strong> — Click the "Unlock" button when you're eligible</li>
-            <li><strong>Earn monthly salary</strong> — Once claimed, the reward amount is deposited to your account <strong>every 30 days</strong> automatically</li>
+            <li><strong>Get instant bonus</strong> — Once unlocked, the reward amount is credited <strong>one time</strong> to your account immediately</li>
           </ol>
-          <p className="rl-guide__note">💡 You can claim multiple levels! Each claimed level pays its own monthly salary separately.</p>
+          <p className="rl-guide__note">💡 You can claim multiple levels! Each level gives a one-time bonus when you complete its requirement.</p>
         </div>
       </div>
 
@@ -154,8 +155,8 @@ const RewardList = () => {
                   <span className="rl-level__detail-value">{level.team}</span>
                 </div>
                 <div className="rl-level__detail">
-                  <span className="rl-level__detail-label">Monthly Salary</span>
-                  <span className="rl-level__detail-value rl-level__reward">Rs. {level.reward}</span>
+                  <span className="rl-level__detail-label">Bonus Amount</span>
+                  <span className="rl-level__detail-value rl-level__reward">Rs. {formatCurrencyPKR(level.reward)}</span>
                 </div>
                 {level.claimed && level.claimInfo && (
                   <>
@@ -164,12 +165,8 @@ const RewardList = () => {
                       <span className="rl-level__detail-value">{level.claimInfo.claimedAt}</span>
                     </div>
                     <div className="rl-level__detail">
-                      <span className="rl-level__detail-label">Next Payout</span>
-                      <span className="rl-level__detail-value">{level.claimInfo.nextPayout}</span>
-                    </div>
-                    <div className="rl-level__detail">
-                      <span className="rl-level__detail-label">Total Earned</span>
-                      <span className="rl-level__detail-value rl-level__reward">Rs. {level.claimInfo.totalEarned}</span>
+                      <span className="rl-level__detail-label">Bonus Received</span>
+                      <span className="rl-level__detail-value rl-level__reward">Rs. {formatCurrencyPKR(level.claimInfo.totalEarned)}</span>
                     </div>
                   </>
                 )}

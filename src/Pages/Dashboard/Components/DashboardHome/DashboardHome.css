@@ -45,6 +45,11 @@
   opacity: 0.7;
 }
 
+.dbh-balance-hero__sub--pair {
+  display: block;
+  margin-top: 4px;
+}
+
 .dbh-balance-hero__icon {
   font-size: 48px;
   opacity: 0.3;

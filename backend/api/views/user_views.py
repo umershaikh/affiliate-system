@@ -61,20 +61,42 @@ def dashboard_stats_view(request):
         rejected_count=Count('id', filter=Q(status='Rejected')),
     )
 
-    # Available balance = approved deposits - approved withdrawals - pending withdrawals
+    # Available balance base = approved deposits - approved withdrawals - pending withdrawals
     approved_deposits = float(deposit_agg['approved'] or 0)
     approved_withdrawals = float(withdrawal_agg['approved'] or 0)
     pending_withdrawals = float(withdrawal_agg['pending'] or 0)
-    available_balance = max(approved_deposits - approved_withdrawals - pending_withdrawals, 0)
+    base_available_balance = approved_deposits - approved_withdrawals - pending_withdrawals
 
     # Team / Referrals
+    left_count = 0
+    right_count = 0
     try:
         profile = user.userprofile
         direct_referrals = profile.get_direct_referrals()
         team_size = profile.get_team_size()
+
+        # ── Binary pair bonus (200 PKR per left/right pair) ──
+        #
+        # Count members separately on left and right sides (including all levels)
+        # and credit 200 PKR for every complete pair.
+        left_child = profile.get_left_child()
+        right_child = profile.get_right_child()
+
+        if left_child:
+            # 1 for the immediate child + its full downline
+            left_count = 1 + left_child.get_team_size()
+        if right_child:
+            right_count = 1 + right_child.get_team_size()
+
+        pair_count = min(left_count, right_count)
+        pair_bonus_amount = float(pair_count * 200)
     except UserProfile.DoesNotExist:
         direct_referrals = 0
         team_size = 0
+        pair_bonus_amount = 0.0
+
+    # Final available balance includes binary pair bonuses
+    available_balance = max(base_available_balance + pair_bonus_amount, 0)
 
     # Pins
     pins_available = PinCode.objects.filter(assigned_to=user, status='Available').count()
@@ -100,6 +122,8 @@ def dashboard_stats_view(request):
         'team': {
             'directReferrals': direct_referrals,
             'totalTeamSize': team_size,
+            'leftCount': left_count,
+            'rightCount': right_count,
         },
         'pins': {
             'available': pins_available,
@@ -364,9 +388,6 @@ def rewards_view(request):
     """Return all reward levels + user's progress + claim status."""
     user = request.auth_user
 
-    # Process any pending payouts first
-    process_reward_payouts(user)
-
     # Get user's team size
     try:
         profile = user.userprofile
@@ -384,7 +405,6 @@ def rewards_view(request):
     for ur in UserReward.objects.filter(user=user):
         claimed_map[ur.reward_id] = {
             'claimedAt': ur.claimed_at.strftime('%Y-%m-%d'),
-            'nextPayout': ur.next_payout.strftime('%Y-%m-%d'),
             'totalEarned': float(ur.total_earned),
         }
 
@@ -438,7 +458,7 @@ def rewards_view(request):
 @require_http_methods(["POST"])
 @login_required
 def reward_claim_view(request):
-    """Claim a reward level — starts monthly salary."""
+    """Claim a reward level — one-time bonus credited immediately."""
     data, err = _parse_json_body(request)
     if err:
         return err
@@ -472,17 +492,37 @@ def reward_claim_view(request):
     if UserReward.objects.filter(user=user, reward=reward).exists():
         return JsonResponse({'success': False, 'message': 'You have already claimed this reward.'}, status=400)
 
-    # Claim it — first payout in 30 days
     now = timezone.now()
+    # Parse reward amount from reward.reward text
+    try:
+        amount = int(re.search(r'\d+', str(reward.reward)).group()) if reward.reward else 0
+    except (ValueError, AttributeError):
+        amount = 0
+
+    if amount <= 0:
+        return JsonResponse({'success': False, 'message': 'Invalid reward amount configured.'}, status=400)
+
+    # Credit one-time bonus as an approved deposit
+    Deposit.objects.create(
+        user=user,
+        amount=amount,
+        status='Approved',
+        payment_method='Reward',
+        trx_id=f'REWARD-{reward.rank}-{now.strftime("%Y%m%d%H%M%S")}',
+        sender_account='System',
+    )
+
+    # Record claim so level cannot be claimed again
     UserReward.objects.create(
         user=user,
         reward=reward,
-        next_payout=now + timezone.timedelta(days=30),
+        next_payout=now,
+        total_earned=amount,
     )
 
     return JsonResponse({
         'success': True,
-        'message': f'🎉 Congratulations! You\'ve unlocked {reward.rank}! Your monthly salary of Rs. {reward.reward} will be deposited every 30 days.',
+        'message': f'🎉 Congratulations! You\'ve unlocked {reward.rank} and received a one-time bonus of Rs. {amount}.',
     })
 
 

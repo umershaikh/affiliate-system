@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../../context/AuthContext';
 import apiFetch from '../../../../utils/api';
+import { formatCurrencyPKR } from '../../../../utils/format';
 import './DashboardSidebar.css';
 import { 
   LayoutDashboard, History, GitGraph, Medal, UserPlus, KeyRound, Ticket, Lock,
@@ -21,7 +22,10 @@ const DashboardSidebar = ({ closeMobileMenu }) => {
   // Fetch balance for user sidebar
   useEffect(() => {
     if (!isAdminPath) {
-      apiFetch('/api/withdrawals/balance').then(r => r.json()).then(d => setBalance(d.balance)).catch(() => {});
+      apiFetch('/api/dashboard/stats')
+        .then(r => r.json())
+        .then(d => setBalance(d.availableBalance))
+        .catch(() => {});
     }
   }, [isAdminPath]);
 
@@ -93,7 +97,7 @@ const DashboardSidebar = ({ closeMobileMenu }) => {
             <TrendingUp size={14} />
             <span>Available Balance</span>
           </div>
-          <div className="rps-balance-widget__amount">Rs. {balance.toFixed(2)}</div>
+          <div className="rps-balance-widget__amount">Rs. {formatCurrencyPKR(balance)}</div>
         </div>
       )}
 

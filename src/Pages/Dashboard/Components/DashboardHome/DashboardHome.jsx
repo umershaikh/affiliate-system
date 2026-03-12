@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import apiFetch from '../../../../utils/api';
 import { useAuth } from '../../../../context/AuthContext';
+import { formatCurrencyPKR } from '../../../../utils/format';
 import './DashboardHome.css';
 
 const DashboardHome = () => {
@@ -26,6 +27,11 @@ const DashboardHome = () => {
     return <div className="dbh-container"><p>Failed to load dashboard data.</p></div>;
   }
 
+  const leftCount = stats.team?.leftCount || 0;
+  const rightCount = stats.team?.rightCount || 0;
+  const pairCount = Math.min(leftCount, rightCount);
+  const pairBonus = pairCount * 200;
+
   return (
     <div className="dbh-container">
       <header className="dbh-header">
@@ -37,9 +43,12 @@ const DashboardHome = () => {
       <section className="dbh-balance-hero">
         <div className="dbh-balance-hero__left">
           <span className="dbh-balance-hero__label">Available Balance</span>
-          <h2 className="dbh-balance-hero__amount">Rs. {stats.availableBalance.toFixed(2)}</h2>
+          <h2 className="dbh-balance-hero__amount">Rs. {formatCurrencyPKR(stats.availableBalance)}</h2>
           <span className="dbh-balance-hero__sub">
-            Pending withdrawals: Rs. {(stats.withdrawals.pending || 0).toFixed(2)}
+            Pending withdrawals: Rs. {formatCurrencyPKR(stats.withdrawals.pending || 0)}
+          </span>
+          <span className="dbh-balance-hero__sub dbh-balance-hero__sub--pair">
+            Binary pair income: Rs. {formatCurrencyPKR(pairBonus)} ({pairCount} pairs)
           </span>
         </div>
         <div className="dbh-balance-hero__icon">💰</div>
@@ -91,7 +100,7 @@ const DashboardHome = () => {
           <h3 className="dbh-panel__title">My Deposits</h3>
           <div className="dbh-panel__inner-grid">
             <div className="dbh-mini-card dbh-mini--green">
-              <div><h4 className="dbh-mini-val">Rs. {stats.deposits.total.toFixed(2)}</h4><p className="dbh-mini-label">Total Deposited</p></div>
+                <div><h4 className="dbh-mini-val">Rs. {formatCurrencyPKR(stats.deposits.total)}</h4><p className="dbh-mini-label">Total Deposited</p></div>
               <span className="dbh-mini-arrow">❯</span>
             </div>
             <div className="dbh-mini-card dbh-mini--orange">
@@ -113,7 +122,7 @@ const DashboardHome = () => {
           <h3 className="dbh-panel__title">My Withdrawals</h3>
           <div className="dbh-panel__inner-grid">
             <div className="dbh-mini-card dbh-mini--green">
-              <div><h4 className="dbh-mini-val">Rs. {stats.withdrawals.total.toFixed(2)}</h4><p className="dbh-mini-label">Total Withdrawn</p></div>
+                <div><h4 className="dbh-mini-val">Rs. {formatCurrencyPKR(stats.withdrawals.total)}</h4><p className="dbh-mini-label">Total Withdrawn</p></div>
               <span className="dbh-mini-arrow">❯</span>
             </div>
             <div className="dbh-mini-card dbh-mini--orange">
@@ -135,10 +144,10 @@ const DashboardHome = () => {
       {/* Row 3: Quick Summary */}
       <section className="dbh-grid-quad">
         <div className="dbh-promo-card dbh-p-purple">
-          <p>Approved Deposits</p><h3>Rs. {stats.deposits.approved.toFixed(2)}</h3>
+          <p>Approved Deposits</p><h3>Rs. {formatCurrencyPKR(stats.deposits.approved)}</h3>
         </div>
         <div className="dbh-promo-card dbh-p-blue">
-          <p>Approved Withdrawals</p><h3>Rs. {stats.withdrawals.approved.toFixed(2)}</h3>
+          <p>Approved Withdrawals</p><h3>Rs. {formatCurrencyPKR(stats.withdrawals.approved)}</h3>
         </div>
         <div className="dbh-promo-card dbh-p-indigo">
           <p>Direct Referrals</p><h3>{stats.team.directReferrals}</h3>

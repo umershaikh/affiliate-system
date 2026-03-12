@@ -5,6 +5,9 @@ import './MyTree.css';
 
 const TreeNode = ({ node, isRoot = false, depth = 0 }) => {
   const navigate = useNavigate();
+  const [expanded, setExpanded] = useState(isRoot);
+
+  const hasChildren = node.children && node.children.some(c => c && c.status !== 'empty');
   const initials = node.status !== 'empty'
     ? (node.name || '??').slice(0, 2).toUpperCase()
     : '+';
@@ -18,14 +21,26 @@ const TreeNode = ({ node, isRoot = false, depth = 0 }) => {
   return (
     <div className={`mt-branch ${isRoot ? 'mt-branch--root' : ''}`}>
       <div className="mt-node">
-        <div
-          className={`mt-avatar mt-avatar--${node.status}`}
-          onClick={handleEmptyClick}
-          style={node.status === 'empty' ? { cursor: 'pointer' } : {}}
-          title={node.status === 'empty' ? 'Click to add a member' : ''}
-        >
-          <span className="mt-avatar__text">{initials}</span>
-          {node.status === 'root' && <div className="mt-avatar__ring" />}
+        <div className="mt-node__header">
+          {hasChildren && (
+            <button
+              type="button"
+              className={`mt-toggle ${expanded ? 'mt-toggle--open' : ''}`}
+              onClick={() => setExpanded(prev => !prev)}
+              aria-label={expanded ? 'Collapse branch' : 'Expand branch'}
+            >
+              <span className="mt-toggle__icon">{expanded ? '▾' : '▸'}</span>
+            </button>
+          )}
+          <div
+            className={`mt-avatar mt-avatar--${node.status}`}
+            onClick={handleEmptyClick}
+            style={node.status === 'empty' ? { cursor: 'pointer' } : {}}
+            title={node.status === 'empty' ? 'Click to add a member' : ''}
+          >
+            <span className="mt-avatar__text">{initials}</span>
+            {node.status === 'root' && <div className="mt-avatar__ring" />}
+          </div>
         </div>
         <div className="mt-node__info">
           <span className="mt-node__name">{node.name}</span>
@@ -37,7 +52,7 @@ const TreeNode = ({ node, isRoot = false, depth = 0 }) => {
         </div>
       </div>
 
-      {node.children && node.children.length > 0 && (
+      {expanded && node.children && node.children.length > 0 && (
         <div className="mt-children">
           {node.children.map((child, i) => (
             <TreeNode key={i} node={child} depth={depth + 1} />
@@ -53,6 +68,7 @@ const countNodes = (node) => {
   let total = 1, left = 0, right = 0;
   if (node.children) {
     node.children.forEach(c => {
+      if (!c) return;
       const sub = countNodes(c);
       total += sub.total;
       if (c.position === 'left') left += sub.total;
