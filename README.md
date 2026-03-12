@@ -1,70 +1,169 @@
-# Getting Started with Create React App
+# Alpha Wealth Pro – Affiliate Binary Network Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Alpha Wealth Pro is a full‑stack affiliate / network marketing platform that combines a modern React dashboard with a robust Django API.  
+It implements a binary tree referral system, automatic binary income calculation, E‑Pin based account creation, financial operations, and an “Alpha Bonus” tiered reward program.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Overview
 
-### `npm start`
+Alpha Wealth Pro is designed for affiliate / MLM‑style businesses that want to:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Track users in a **binary tree** (left / right) structure.
+- Pay **binary income** whenever left/right pairs are completed.
+- Manage **deposits** and **withdrawals** with multiple payment methods (EasyPaisa, JazzCash, Bank).
+- Sell and consume **E‑Pins** to create new accounts under the network.
+- Reward growth via **Alpha Bonus tiers** that unlock one‑time bonuses when team‑size requirements are met.
+- Provide a clean, mobile‑friendly **dashboard** and an **admin panel** to manage the whole system.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Frontend**
+  - React (Create React App)
+  - `react-router-dom` – routing and protected dashboard routes
+  - React Context for authentication (JWT in `localStorage`)
+  - `axios` (via `apiFetch` wrapper) for API calls
+  - `lucide-react` icons, custom CSS for modern UI
 
-### `npm run build`
+- **Backend**
+  - Django 4.x
+  - Token‑based auth with JWT (PyJWT)
+  - Models for `UserProfile`, `Deposit`, `Withdrawal`, `Reward`, `UserReward`, `PinCode`, `PinRequest`, and `Account`
+  - SQLite (dev) / PostgreSQL (via `dj-database-url`) in production
+  - `django-cors-headers`, `whitenoise`, `gunicorn` for production
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Core Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **User Authentication & Roles**
+  - Login with JWT‑based authentication.
+  - `UserProfile` extends Django’s `User` with `role` (user/admin) and binary tree info.
 
-### `npm run eject`
+- **Binary Tree Network**
+  - Each user has a `parent` and a `position` (`left` / `right`).
+  - Backend computes team size recursively.
+  - Frontend shows a collapsible **My Tree** view with a binary diagram and stats for left/right members.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Binary Income (Pair Bonus)**
+  - For every **1 left + 1 right** completed pair in a user’s downline, the user earns **200 PKR**.
+  - Left and right counts include the entire subtree on each side (all levels).
+  - The **available balance** displayed in the dashboard and sidebar includes this binary income.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Financial Operations**
+  - **Deposits**: users can submit deposit requests with payment screenshot and method.
+  - **Withdrawals**: users can request withdrawals to EasyPaisa, JazzCash, or Bank.
+  - Admin views for pending/approved/rejected deposits and withdrawals.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **E‑Pins**
+  - Users can request/buy E‑Pins.
+  - E‑Pins are used to create new accounts under a specific user and side (left/right).
+  - Admin can manage available and pending pins.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Alpha Bonus (One‑Time Rewards)**
+  - Configurable reward tiers (team size, rank, and amount).
+  - When a user meets the team requirement and clicks **Unlock**, they receive a **one‑time bonus** (credited as an approved deposit).
+  - Each level can be claimed only once; users then aim for the next tier.
 
-## Learn More
+- **Admin Panel**
+  - Separate admin dashboard for:
+    - Users
+    - Deposits (pending / all)
+    - Withdrawals (pending / today / all)
+    - E‑Pins (available / pending requests)
+    - Reward tiers
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
+- `backend/` – Django project (`core`) and API app (`api`)
+  - `api/models.py` – domain models (profiles, tree, deposits, withdrawals, rewards, pins, accounts, contact messages).
+  - `api/views/` – `auth_views`, `user_views`, `admin_views` for the REST‑like API.
+  - `core/settings.py` – Django settings, database, CORS, static files.
+  - `core/urls.py` – routes `/admin/` and `/api/`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `src/` – React SPA
+  - `Pages/Dashboard/` – user & admin dashboard shell + all dashboard pages.
+  - `Pages/Dashboard/Components/DashboardHome/` – main user overview (balances, stats).
+  - `Pages/Dashboard/Components/MyTree/` – binary tree visualization.
+  - `Pages/Dashboard/Components/RewardList/` – Alpha Bonus UI.
+  - `context/AuthContext` – authentication and user role context.
+  - `utils/api.js` – fetch wrapper that injects JWT and base API URL.
+  - `utils/format.js` – currency formatting helper for PKR.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Running the Project Locally
 
-### Making a Progressive Web App
+### 1. Backend (Django API)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+From the project root:
 
-### Advanced Configuration
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8000
+```
 
-### Deployment
+The API will be available at `http://localhost:8000`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### 2. Frontend (React)
 
-### `npm run build` fails to minify
+From the project root:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm install
+npm start
+```
+
+The React app will run at `http://localhost:3000` and, in development, proxy `/api/*` calls to `http://localhost:8000`.
+
+---
+
+## Environment Configuration
+
+### Backend
+
+Key environment variables:
+
+- `DJANGO_SECRET_KEY` – secret key for Django (required in production).
+- `DATABASE_URL` – (optional) PostgreSQL connection string.
+- `FRONTEND_URL` – URL of the deployed frontend (for CORS).
+- `RENDER` / `RENDER_EXTERNAL_HOSTNAME` – used when deploying to Render or similar PaaS.
+
+### Frontend
+
+The API base URL is configured via:
+
+- `REACT_APP_API_URL` – e.g. `https://your-backend-domain.com`
+
+If this is not set, the React app will call relative `/api/...` paths (useful for local dev with a proxy).
+
+---
+
+## Scripts
+
+### Frontend
+
+- `npm start` – start the React dev server.
+- `npm run build` – create a production build of the React app.
+
+### Backend
+
+- `python manage.py runserver` – start the Django development server.
+- `python manage.py migrate` – apply database migrations.
+
+---
+
+## License
+
+This project is proprietary and intended for demonstration / client use.  
+Do not use, modify, or distribute without permission from the project owner.
+
