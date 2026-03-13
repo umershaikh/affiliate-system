@@ -85,7 +85,7 @@ const DashboardSidebar = ({ closeMobileMenu }) => {
       {/* Logo */}
       <div className="rps-logo-wrapper">
         <h2 className="rps-brand-name">
-          ALPHA<span className="rps-brand-accent">.</span>
+          Alpha Wealth<span className="rps-brand-accent">.</span>
         </h2>
         {isAdminPath && <span className="rps-admin-tag">Admin Panel</span>}
       </div>

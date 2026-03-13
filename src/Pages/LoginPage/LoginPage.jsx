@@ -58,7 +58,7 @@ const LoginPage = () => {
       <div className="dynamic-glass-container">
         <form className="dynamic-login-form" onSubmit={handleLogin}>
           <header className="dynamic-form-header">
-            <h1 className="dynamic-brand-logo">ALPHA</h1>
+            <h1 className="dynamic-brand-logo">Alpha Wealth</h1>
             
             <div className="company-description-urdu">
               <p>Pakistan Alpha Wealth کی ایک جدید ڈیجیٹل سرمایہ کاری کمپنی ہے جو کہ لوگوں کو سرمایہ کاری کرنے کا موقع فراہم کرتی ہے۔</p>
