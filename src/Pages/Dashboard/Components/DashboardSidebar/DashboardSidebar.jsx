@@ -84,10 +84,13 @@ const DashboardSidebar = ({ closeMobileMenu }) => {
     <aside className={`rps-sidebar-root ${isAdminPath ? 'admin-mode' : ''}`}>
       {/* Logo */}
       <div className="rps-logo-wrapper">
-        <h2 className="rps-brand-name">
-          Alpha Wealth<span className="rps-brand-accent">.</span>
-        </h2>
-        {isAdminPath && <span className="rps-admin-tag">Admin Panel</span>}
+        <div className="rps-logo-top">
+          <h2 className="rps-brand-name">
+            Alpha Wealth<span className="rps-brand-accent">.</span>
+          </h2>
+          {isAdminPath && <span className="rps-admin-tag">Admin Panel</span>}
+        </div>
+        <div className="rps-brand-tagline">Alpha Today • Success Forever</div>
       </div>
 
       {/* Balance Widget (user side only) */}
