@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
+import apiFetch from '../../utils/api';
 import './ContactSection.css';
 
 const ContactSection = () => {
@@ -26,7 +27,7 @@ const ContactSection = () => {
     }
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await apiFetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, recaptchaToken }),

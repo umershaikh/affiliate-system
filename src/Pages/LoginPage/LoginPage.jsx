@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import apiFetch from '../../utils/api';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -27,7 +28,7 @@ const LoginPage = () => {
     setStatus({ loading: true, error: '' });
 
     try {
-      const response = await fetch('/api/login', {
+      const response = await apiFetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),

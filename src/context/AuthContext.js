@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import apiFetch from '../utils/api';
 
 const AuthContext = createContext(null);
 
@@ -19,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   // On mount, verify token is still valid
   useEffect(() => {
     if (token) {
-      fetch('/api/me', {
+      apiFetch('/api/me', {
         headers: { 'Authorization': `Bearer ${token}` },
       })
         .then(res => {
