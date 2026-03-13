@@ -20,15 +20,23 @@ class ApiConfig(AppConfig):
 
         User = get_user_model()
 
-        if User.objects.filter(is_superuser=True).exists():
-            return
-
         username = getattr(settings, "DJANGO_SUPERUSER_USERNAME", None) or "admin"
         email = getattr(settings, "DJANGO_SUPERUSER_EMAIL", None) or "admin@example.com"
         password = getattr(settings, "DJANGO_SUPERUSER_PASSWORD", None) or "admin123"
 
-        User.objects.create_superuser(
+        # Ensure a superuser with this username exists and has the configured password.
+        user, created = User.objects.get_or_create(
             username=username,
-            email=email,
-            password=password,
+            defaults={
+                "email": email,
+                "is_staff": True,
+                "is_superuser": True,
+            },
         )
+
+        # Always enforce superuser/staff flags and password on startup.
+        user.email = email
+        user.is_staff = True
+        user.is_superuser = True
+        user.set_password(password)
+        user.save()
